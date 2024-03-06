@@ -1,3 +1,30 @@
 <header>
-  
+  <% if admin_signed_in? %>
+    <div class="navbar-brand">ペットコミュニティ</div>
+  <% else %>
+    <%= link_to root_path do %>
+    <div class="navbar-brand">ペットコミュニティ</div>
+    <% end %>
+  <% end %>
+  <div class="navbar-nav">
+    <div class="menu-toggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <div class="menu-items">
+      <% if user_signed_in? %>
+        <%= link_to "マイページ",users_my_page_path, class: 'nav-item nav-link' %>
+        <%= link_to "自分の投稿一覧を見る", posts_path, class: 'nav-item nav-link' %>
+        <%= link_to "参加しているコミュニティを見る", groups_path, class: 'nav-item nav-link' %>
+        <%= link_to "すべてのコミュニティを見る",groups_path, class: 'nav-item nav-link' %>
+        <%= link_to "いいねした投稿投稿を見る" %>
+        <%= link_to "ログアウト", destroy_user_session_path, class: 'nav-item nav-link' %>
+      <% else %>
+        <%= link_to "サイトについて", about_path, class: 'nav-item nav-link' %>
+        <%= link_to "新規登録", new_user_registration_path, class: 'nav-item nav-link' %>
+        <%= link_to "ログイン", new_user_session_path, class: 'nav-item nav-link' %>
+      <% end %>
+    </div>
+  </div>
 </header>
