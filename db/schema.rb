@@ -90,6 +90,7 @@ ActiveRecord::Schema.define(version: 2024_03_06_120552) do
     t.date "birthday"
     t.string "kind", null: false
     t.text "introduction"
+    t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

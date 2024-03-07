@@ -9,9 +9,31 @@
     <script src="https://kit.fontawesome.com/05b967b61a.js" crossorigin="anonymous"></script>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- jQueryの読み込み -->
+    <!--全文を表示する要素をスライドダウンさせて表示する-->
+    <script>
+      $(document).ready(function() {
+        $("#show-full-intro-link").click(function() {
+          $("#intro-full").slideDown();
+        });
+      });
+    </script>
   </head>
 
   <body>
+    <% if flash[:notice] %>
+      <div class="alert alert-success" role="alert">
+        <%= flash[:notice] %>
+      </div>
+    <% end %>
+
+    <% if flash[:alert] %>
+      <div class="alert alert-danger" role="alert">
+        <%= flash[:alert] %>
+      </div>
+    <% end %>
+
     <%= render 'layouts/header' %>
     <main>
       <%= yield %>

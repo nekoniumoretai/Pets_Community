@@ -1,2 +1,55 @@
-<h1>User::Pets#edit</h1>
-<p>Find me in app/views/user/pets/edit.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 mx-auto">
+      <h1>ペットの編集画面</h1>
+
+      <%= form_with model: @pet, url: pet_path(@pet.id), method: :patch do |f| %>
+        <table class="table">
+          <tbody>
+            <tr>
+              <th>画像</th>
+              <td><%= f.file_field :image, accept: "image/*", class: "form-control-file" %></td>
+            </tr>
+            <tr>
+              <th>ペットの名前</th>
+              <td><%= f.text_field :name, class: "form-control" %></td>
+            </tr>
+            <tr>
+              <th>性別</th>
+              <td><%= f.select :gender, ["オス", "メス", "不明"], prompt: "性別を選択", class: "form-control" %></td>
+            </tr>
+            <tr>
+              <tr>
+                <th>誕生日</th>
+                <td>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <%= f.select :birthday_year, (Date.today.year - 100..Date.today.year).to_a.reverse, { prompt: "年" }, class: "form-control" %>
+                    </div>
+                    <div class="col-md-4">
+                      <%= f.select :birthday_month, 1..12, { prompt: "月" }, class: "form-control" %>
+                    </div>
+                    <div class="col-md-4">
+                      <%= f.select :birthday_day, 1..31, { prompt: "日" }, class: "form-control" %>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <th>品種</th>
+                <td><%= f.text_field :kind, class: "form-control", placeholder: "品種" %></td>
+              </tr>
+              <tr>
+                <th>紹介文</th>
+                <td><%= f.text_area :introduction, class: "form-control", rows: 5, placeholder: "紹介文" %></td>
+              </tr>
+              <td colspan="2" class="text-center">
+                <%= f.submit '保存', class: "btn btn-primary" %>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      <% end %>
+    </div>
+  </div>
+</div>

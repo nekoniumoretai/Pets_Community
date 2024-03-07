@@ -1,0 +1,44 @@
+<div class="container">
+  <h2 class="mt-5 mb-4 text-center">マイページ</h2>
+  <table class="table mx-auto" style="width: 400px;">
+    <tbody>
+      <tr>
+        <th>プロフィール画像</th>
+        <td><%= image_tag @user.get_profile_image, class: "rounded-circle", size: "100x100" %></td>
+      </tr>
+      <tr>
+        <th>ニックネーム:</th>
+        <td><%= @user.nickname %></td>
+      </tr>
+      <tr>
+        <th>メールアドレス:</th>
+        <td><%= @user.email %></td>
+      </tr>
+      <tr>
+        <th>自己紹介</th>
+        <td>
+          <div id="intro-short">
+            <%= truncate(@user.introduction, length: 30, omission: '...') %>
+            <%= link_to "続きを見る", "#", id: "show-full-intro-link" %>
+          </div>
+          <div id="intro-full" style="display: none;">
+            <%= @user.introduction %>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2" class="text-center">
+          <%= link_to "マイ情報を編集する", edit_user_path(@user), class:"btn btn-success" %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<script>
+  // "続きを見る"リンクがクリックされたときの処理
+  document.getElementById("show-full-intro-link").addEventListener("click", function() {
+    document.getElementById("intro-short").style.display = "none";
+    document.getElementById("intro-full").style.display = "block";
+  });
+</script>

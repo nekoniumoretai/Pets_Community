@@ -1,30 +1,53 @@
 <header>
-  <% if admin_signed_in? %>
-    <div class="navbar-brand">ペットコミュニティ</div>
-  <% else %>
-    <%= link_to root_path do %>
-    <div class="navbar-brand">ペットコミュニティ</div>
-    <% end %>
-  <% end %>
-  <div class="navbar-nav">
-    <div class="menu-toggle">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-    <div class="menu-items">
-      <% if user_signed_in? %>
-        <%= link_to "マイページ",users_my_page_path, class: 'nav-item nav-link' %>
-        <%= link_to "自分の投稿一覧を見る", posts_path, class: 'nav-item nav-link' %>
-        <%= link_to "参加しているコミュニティを見る", groups_path, class: 'nav-item nav-link' %>
-        <%= link_to "すべてのコミュニティを見る",groups_path, class: 'nav-item nav-link' %>
-        <%= link_to "いいねした投稿投稿を見る" %>
-        <%= link_to "ログアウト", destroy_user_session_path, class: 'nav-item nav-link' %>
-      <% else %>
-        <%= link_to "サイトについて", about_path, class: 'nav-item nav-link' %>
-        <%= link_to "新規登録", new_user_registration_path, class: 'nav-item nav-link' %>
-        <%= link_to "ログイン", new_user_session_path, class: 'nav-item nav-link' %>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <% if admin_signed_in? %>
+      <a class="navbar-brand" href="#">ペットコミュニティ</a>
+    <% else %>
+      <%= link_to root_path, class: "navbar-brand" do %>
+        ペットコミュニティ
       <% end %>
+    <% end %>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto">
+        <% if user_signed_in? %>
+          <li class="nav-item">
+            <%= link_to "マイページ", users_my_page_path, class: 'nav-link' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "投稿する", new_post_path, class: 'nav-link' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "自分の投稿一覧を見る", posts_path, class: 'nav-link' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "参加しているコミュニティを見る", groups_path, class: 'nav-link' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "すべてのコミュニティを見る", groups_path, class: 'nav-link' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "いいねした投稿投稿を見る", class: 'nav-link' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'nav-link' %>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <%= link_to "サイトについて", about_path, class: 'nav-link' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "新規登録", new_user_registration_path, class: 'nav-link' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "ログイン", new_user_session_path, class: 'nav-link' %>
+          </li>
+        <% end %>
+      </ul>
     </div>
-  </div>
+  </nav>
 </header>

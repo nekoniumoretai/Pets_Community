@@ -1,2 +1,49 @@
-<h1>User::Pets#show</h1>
-<p>Find me in app/views/user/pets/show.html.erb</p>
+<div class="container">
+  <h1 class="mt-4 mb-4 text-center">ペット詳細</h1>
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <table class="table">
+        <tbody>
+          <tr>
+            <th>画像</th>
+            <td>
+               <!-- 画像がない場合no_imageを表示 -->
+              <% if @pet.image.attached? %>
+                <%= image_tag @pet.image, class: "rounded-circle", size: "200x200" %>
+              <% else %>
+                <%= image_tag "no_image.jpg", class: "rounded-circle", size: "200x200" %>
+              <% end %>
+            </td>
+          </tr>
+          <tr>
+            <th>名前</th>
+            <td><%= @pet.name %></td>
+          </tr>
+          <tr>
+            <th>性別</th>
+            <td><%= @pet.gender %></td>
+          </tr>
+          <tr>
+            <th>誕生日</th>
+            <td><%= @pet.birthday %></td>
+          </tr>
+          <tr>
+            <th>品種</th>
+            <td><%= @pet.kind %></td>
+          </tr>
+          <tr>
+            <th>紹介文</th>
+            <td><%= @pet.introduction %></td>
+          </tr>
+          <tr>
+            <% if @pet.user == current_user %>
+              <td colspan="2" class="text-center">
+                <%= link_to "編集", edit_pet_path(@pet), class:"btn btn-success ml-5" %>
+                <%= link_to "削除", pet_path(@pet), method: :delete, data: { confirm:"削除しますか？" }, class:"btn btn-danger ml-5" %>
+              </td>
+            <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

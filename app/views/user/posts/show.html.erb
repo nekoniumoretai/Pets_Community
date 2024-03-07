@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 mx-auto">
+      <table class="table table-bordered">
+        <tbody>
+          <tr>
+            <th>ユーザーネーム</th>
+            <td><%= @post.user.nickname %></td>
+          </tr>
+        <% if @post.image.attached? %>
+          <tr>
+            <th>投稿した画像</th>
+            <td class="text-center">
+              <%= image_tag @post.image, size: "200x200" %>
+            </td>
+          </tr>
+        <% end %>
+          <tr>
+            <th>タイトル</th>
+            <td><%= @post.title %></td>
+          </tr>
+          <tr>
+            <th>本文</th>
+            <td><%= @post.body %></td>
+          </tr>
+          <tr>
+            <th>投稿日</th>
+            <td><%= @post.created_at.strftime('%Y/%m/%d') %></td>
+          </tr>
+          <tr>
+            <% if @post.user == current_user %>
+              <td colspan="2" class="text-center">
+                <%= link_to "編集", edit_post_path(@post), class:"btn btn-success ml-5" %>
+                <%= link_to "削除", post_path(@post), method: :delete, data: { confirm:"削除しますか？" }, class:"btn btn-danger ml-5" %>
+              </td>
+            <% end %>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

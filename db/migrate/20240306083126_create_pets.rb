@@ -6,6 +6,7 @@ class CreatePets < ActiveRecord::Migration[6.1]
       t.date :birthday
       t.string :kind, null: false
       t.text :introduction
+      t.integer :user_id
       t.timestamps
     end
   end

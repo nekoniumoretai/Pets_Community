@@ -26,13 +26,13 @@ Rails.application.routes.draw do
     get "users/information/edit" => "users#edit"
     patch "users/information" => "users#update"
     get "/search", to: "searches#search"
-
+    resources :pets, only: [:index, :update, :destroy, :create, :edit, :show ,:new]
+    
     resources :posts, only: [:create, :new, :index, :show, :edit, :destroy, :update] do
       resources :post_comments, only: [:create, :destroy]
       resource :favorites, only: [:create, :destroy]
     end
 
-    resources :pets, only: [:index, :update, :destroy, :create, :edit, :show ,:new]
     resources :groups, only: [:create, :new, :index, :show, :edit, :update] do
       resource :group_users, only: [:create, :destroy]
     end
@@ -42,9 +42,7 @@ Rails.application.routes.draw do
       get "followings" =>"relationships#followings", as: "followings"
       get "followers" =>"relationships#followers", as: "followers"
     end
-
-    resources :messages, only: [:create]
-    resources :rooms, only: [:create, :show]
+    
   end
 
   # 管理者

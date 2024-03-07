@@ -1,2 +1,48 @@
-<h1>User::Pets#new</h1>
-<p>Find me in app/views/user/pets/new.html.erb</p>
+<div class="container">
+  <h1 class="mt-4 mb-4">ペット登録画面</h1>
+  <%= form_with model: @pet, class: "mt-4" do |f| %>
+    <table class="table">
+      <tbody>
+        <tr>
+          <th><%= f.label :image, "ペットの画像" %></th>
+          <td><%= f.file_field :image, accept: "image/*" %></td>
+        </tr>
+        <tr>
+          <th><%= f.label :name, "ペットの名前 (*必須)" %></th>
+          <td><%= f.text_field :name, class: "form-control", placeholder: "ペットの名前" %></td>
+        </tr>
+        <tr>
+          <th><%= f.label :gender, "性別 (*必須)" %></th>
+          <td><%= f.select :gender, ["オス", "メス", "不明"], prompt: "性別を選択", class: "form-control" %></td>
+        </tr>
+        <tr>
+          <th><%= f.label :birthday, "誕生日" %></th>
+          <td>
+            <div class="row">
+              <div class="col-md-4">
+                <%= f.select :birthday_year, (Date.today.year - 100..Date.today.year).to_a.reverse, { prompt: "年" }, class: "form-control" %>
+              </div>
+              <div class="col-md-4">
+                <%= f.select :birthday_month, 1..12, { prompt: "月" }, class: "form-control" %>
+              </div>
+              <div class="col-md-4">
+                <%= f.select :birthday_day, 1..31, { prompt: "日" }, class: "form-control" %>
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <th><%= f.label :kind, "品種 (*必須)" %></th>
+          <td><%= f.text_field :kind, class: "form-control", placeholder: "品種" %></td>
+        </tr>
+        <tr>
+          <th><%= f.label :introduction, "紹介文" %></th>
+          <td><%= f.text_area :introduction, class: "form-control", rows: 5, placeholder: "紹介文" %></td>
+        </tr>
+        <tr>
+          <td colspan="2" class="text-center"><%= f.submit "登録する", class: "btn btn-primary" %></td>
+        </tr>
+      </tbody>
+    </table>
+  <% end %>
+</div>
