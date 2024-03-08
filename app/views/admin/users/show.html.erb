@@ -1,2 +1,40 @@
-<h1>Admin::Users#show</h1>
-<p>Find me in app/views/admin/users/show.html.erb</p>
+ <!--<tr>-->
+        <!--<td colspan="2" class="text-center">-->
+          <!--<%= link_to "マイペット", pets_path(@user), class:"btn btn-primary" %>-->
+          <!--<%= link_to "マイ情報を編集する", edit_user_path(@user), class:"btn btn-success" %>-->
+        <!--</td>-->
+<div class="container">
+  <h2 class="mt-5 mb-4 text-center"><%= @user.nickname %>さんの詳細情報<%= link_to "情報を編集する", edit_admin_user_path(@user), class: "btn btn-success ml-5" %></h2>
+  <table class="table mx-auto" style="width: 400px;">
+    <tbody>
+      <tr>
+        <th>プロフィール画像</th>
+        <td><%= image_tag @user.get_profile_image, class: "rounded-circle", size: "100x100" %></td>
+      </tr>
+      <tr>
+        <th>会員ステータス:</th>
+        <td><%= @user.is_active ? '有効' : '停止中' %></td>
+      </tr>
+      <tr>
+        <th>ニックネーム:</th>
+        <td><%= @user.nickname %></td>
+      </tr>
+      <tr>
+        <th>メールアドレス:</th>
+        <td><%= @user.email %></td>
+      </tr>
+      <tr>
+        <th>自己紹介文</th>
+        <td>
+          <div id="intro-short">
+            <%= truncate(@user.introduction, length: 30, omission: '...') %>
+            <%= link_to "続きを見る", "#", id: "show-full-intro-link" %>
+          </div>
+          <div id="intro-full" style="display: none;">
+            <%= @user.introduction %>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
-  devise_for :admins, skip: [:registrations, :passwords], controllers: {
+  devise_for :admins, skip: [:passwords], controllers: {
     sessions: 'admin/sessions'
   }
 
@@ -27,7 +27,7 @@ Rails.application.routes.draw do
     patch "users/information" => "users#update"
     get "/search", to: "searches#search"
     resources :pets, only: [:index, :update, :destroy, :create, :edit, :show ,:new]
-    
+
     resources :posts, only: [:create, :new, :index, :show, :edit, :destroy, :update] do
       resources :post_comments, only: [:create, :destroy]
       resource :favorites, only: [:create, :destroy]
@@ -42,13 +42,13 @@ Rails.application.routes.draw do
       get "followings" =>"relationships#followings", as: "followings"
       get "followers" =>"relationships#followers", as: "followers"
     end
-    
+
   end
 
   # 管理者
     namespace :admin do
-    get "/" => 'homes#top'
-    resources :posts, only: [:index, :show]
-    resources :users, only: [:index, :show, :edit]
+      get "/" => 'homes#top'
+      resources :posts, only: [:index, :show]
+      resources :users, only: [:index, :show, :edit]
   end
 end

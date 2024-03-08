@@ -1,4 +1,5 @@
 class User::GroupsController < ApplicationController
+  
   def new
   end
 

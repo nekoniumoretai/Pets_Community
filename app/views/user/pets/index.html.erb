@@ -1,25 +1,32 @@
 <div class="container">
   <h1 class="mt-4 mb-4 text-center"><%= current_user.nickname %>さんのペットたち</h1>
-  <div class="row">
-    <% @pets.each do |pet| %>
-      <div class="col-md-4 mb-4">
-        <div class="card">
-          <% if pet.image.attached? %>
-            <%= image_tag pet.image, class: "card-img-top rounded-circle", size: "200x200" %>
-          <% else %>
-            <%= image_tag "no_image.jpg", class: "card-img-top rounded-circle", size: "200x200" %>
-          <% end %>
-          <div class="card-body">
-            <h5 class="card-title text-center">
-              <%= link_to pet.name, pet_path(pet) %>
-            </h5>
-            <p class="card-text">性別: <%= pet.gender %></p>
-            <p class="card-text">誕生日: <%= pet.birthday %></p>
-            <p class="card-text">品種: <%= pet.kind %></p>
-            <p class="card-text">紹介文: <%= truncate(pet.introduction, length: 20) %></p>
+  <% if @pets.any? %>
+    <div class="row">
+      <% @pets.each do |pet| %>
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            <% if pet.image.attached? %>
+              <%= image_tag pet.image, class: "card-img-top rounded-circle", size: "200x200" %>
+            <% else %>
+              <%= image_tag "no_image.jpg", class: "card-img-top rounded-circle", size: "200x200" %>
+            <% end %>
+            <div class="card-body">
+              <h5 class="card-title text-center">
+                <%= link_to pet.name, pet_path(pet) %>
+              </h5>
+              <p class="card-text">性別: <%= pet.gender %></p>
+              <p class="card-text">誕生日: <%= pet.birthday %></p>
+              <p class="card-text">品種: <%= pet.kind %></p>
+              <p class="card-text">紹介文: <%= truncate(pet.introduction, length: 20) %></p>
+            </div>
           </div>
         </div>
-      </div>
-    <% end %>
-  </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="text-center">ペットが登録されていません。</p>
+    <div class="text-center">
+      <%= link_to "ペットを登録する", new_pet_path, class: "btn btn-primary" %>
+    </div>
+  <% end %>
 </div>

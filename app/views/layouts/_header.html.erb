@@ -14,7 +14,20 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto">
-        <% if user_signed_in? %>
+        <% if admin_signed_in? %>
+          <li class="nav-item">
+            <%= link_to "ユーザーの投稿を確認する", admin_posts_path, class: 'nav-link' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "登録しているユーザーを確認する", admin_users_path, class: 'nav-link' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: 'nav-link' %>
+          </li>
+        <% elsif request.fullpath.include?("/admin") %>
+        <!--管理者はログインしていないとヘッダーには何も表示されない-->
+          <% %>
+        <% elsif user_signed_in? %>
           <li class="nav-item">
             <%= link_to "マイページ", users_my_page_path, class: 'nav-link' %>
           </li>

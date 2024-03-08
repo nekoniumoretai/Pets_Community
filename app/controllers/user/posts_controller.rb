@@ -1,4 +1,6 @@
 class User::PostsController < ApplicationController
+  
+  
   def new
     @post = Post.new
   end

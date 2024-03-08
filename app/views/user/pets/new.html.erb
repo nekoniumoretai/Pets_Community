@@ -16,7 +16,7 @@
           <td><%= f.select :gender, ["オス", "メス", "不明"], prompt: "性別を選択", class: "form-control" %></td>
         </tr>
         <tr>
-          <th><%= f.label :birthday, "誕生日" %></th>
+          <th><%= f.label :birthday, "ペットの誕生日" %></th>
           <td>
             <div class="row">
               <div class="col-md-4">
@@ -36,7 +36,7 @@
           <td><%= f.text_field :kind, class: "form-control", placeholder: "品種" %></td>
         </tr>
         <tr>
-          <th><%= f.label :introduction, "紹介文" %></th>
+          <th><%= f.label :introduction, "ペットの紹介文" %></th>
           <td><%= f.text_area :introduction, class: "form-control", rows: 5, placeholder: "紹介文" %></td>
         </tr>
         <tr>

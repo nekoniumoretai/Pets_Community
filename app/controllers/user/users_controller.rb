@@ -1,5 +1,4 @@
 class User::UsersController < ApplicationController
-  before_action :authenticate_user!
 
   def show
     @user = current_user
@@ -22,7 +21,7 @@ class User::UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:nickname, :introduction, :email, :profile_image)
+    params.require(:user).permit(:nickname, :introduction, :email, :profile_image, :is_active)
   end
 end
 
