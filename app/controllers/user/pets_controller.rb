@@ -1,6 +1,6 @@
 class User::PetsController < ApplicationController
-  
-  
+
+
   def new
     @pet = Pet.new
   end
@@ -19,7 +19,8 @@ class User::PetsController < ApplicationController
   end
 
   def index
-     @pets = Pet.order(created_at: :desc)
+    @pets = Pet.order(created_at: :desc)
+    @user = User.find(params[:user_id])
   end
 
   def show
@@ -48,6 +49,14 @@ class User::PetsController < ApplicationController
   end
 
   private
+
+  def set_user
+     @user = User.find(params[:user_id])
+  end
+
+  def set_pets
+    @pets = @user.pets.order(created_at: :desc)
+  end
 
   def pet_params
     params.require(:pet).permit(:name, :gender, :birthday, :kind, :introduction, :image)

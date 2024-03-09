@@ -1,6 +1,4 @@
 class User::PostsController < ApplicationController
-  
-  
   def new
     @post = Post.new
   end
@@ -44,6 +42,6 @@ class User::PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :body, :image)
+    params.require(:post).permit(:title, :content, images: [])
   end
 end

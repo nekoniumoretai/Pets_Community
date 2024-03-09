@@ -1,31 +1,17 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-8 mx-auto">
-      <h1>編集画面</h1>
+<div style="max-width: 600px; margin: 0 auto;">
+  <h1 style="text-align: center; margin-bottom: 20px;">編集画面</h1>
 
-      <%= form_with model: @post, url: post_path(@post.id), method: :patch do |f| %>
-        <table class="table">
-          <tbody>
-            <tr>
-              <th>画像</th>
-              <td><%= f.file_field :image, accept: "image/*", class: "form-control-file" %></td>
-            </tr>
-            <tr>
-              <th>タイトル</th>
-              <td><%= f.text_field :title, class: "form-control" %></td>
-            </tr>
-            <tr>
-              <th>本文</th>
-              <td><%= f.text_area :body, class: "form-control" %></td>
-            </tr>
-            <tr>
-              <td colspan="2" class="text-center">
-                <%= f.submit '保存', class: "btn btn-primary" %>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      <% end %>
+  <%= form_with model: @post, url: post_path(@post.id), method: :patch do |f| %>
+    <div style="margin-bottom: 20px;">
+      <%= f.label :title, "タイトル", class: "font-weight-bold" %>
+      <%= f.text_field :title, class: "form-control", id: "post_title" %>
     </div>
-  </div>
+    <div style="margin-bottom: 20px;">
+      <%= f.label :content, "本文", class: "font-weight-bold" %>
+      <%= f.rich_text_area :content, id: "post_content" %>
+    </div>
+    <div style="text-align: center;">
+      <%= f.submit '保存', class: "btn btn-primary" %>
+    </div>
+  <% end %>
 </div>

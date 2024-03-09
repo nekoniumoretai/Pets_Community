@@ -1,9 +1,13 @@
 <div class="container">
-  <h2 class="mt-5 mb-4 text-center">マイページ</h2>
+  <% if @user == current_user %>
+    <h2 class="mt-5 mb-4 text-center">マイページ</h2>
+  <% else %>
+    <h2 class="mt-5 mb-4 text-center"><%= "#{@user.nickname} さんのページ" %></h2>
+  <% end %>
   <table class="table mx-auto" style="width: 400px;">
     <tbody>
       <tr>
-        <th>プロフィール画像</th>
+        <th></th>
         <td><%= image_tag @user.get_profile_image, class: "rounded-circle", size: "100x100" %></td>
       </tr>
       <tr>
@@ -11,15 +15,21 @@
         <td><%= @user.nickname %></td>
       </tr>
       <tr>
-        <th>メールアドレス:</th>
-        <td><%= @user.email %></td>
+        <% if @user == current_user %>
+          <th>メールアドレス</th>
+            <td><%= @user.email %></td>
+        <% end %>
       </tr>
       <tr>
         <th>自己紹介</th>
         <td>
           <div id="intro-short">
-            <%= truncate(@user.introduction, length: 30, omission: '...') %>
-            <%= link_to "続きを見る", "#", id: "show-full-intro-link" %>
+            <% if @user.introduction.present? %>
+              <%= truncate_intro = truncate(@user.introduction, length: 30, omission: '...') %>
+              <% if @user.introduction.length > 30 %>
+                <%= link_to "続きを見る", "#", id: "show-full-intro-link" %>
+              <% end %>
+            <% end %>
           </div>
           <div id="intro-full" style="display: none;">
             <%= @user.introduction %>
@@ -27,10 +37,16 @@
         </td>
       </tr>
       <tr>
-        <td colspan="2" class="text-center">
-          <%= link_to "マイペット", pets_path(@user), class:"btn btn-primary" %>
-          <%= link_to "マイ情報を編集する", edit_user_path(@user), class:"btn btn-success" %>
-        </td>
+        <% if @user == current_user %>
+          <td colspan="2" class="text-center">
+            <%= link_to "マイペット", user_pets_path(@user), class:"btn btn-primary" %>
+            <%= link_to "マイ情報を編集する", edit_user_path(@user), class:"btn btn-success" %>
+          </td>
+        <% else %>
+          <td colspan="2" class="text-center">
+            <%= link_to "#{@user.nickname}さんのペットを見る", user_pets_path(@user), class: "btn btn-primary" %>
+          </td>
+        <% end %>
       </tr>
     </tbody>
   </table>

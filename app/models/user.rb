@@ -14,6 +14,11 @@ class User < ApplicationRecord
       email: self.email
     }
   end
+  
+  # ユーザーがアクティブである場合のみ認証する
+  def active_for_authentication?
+    super && is_active?
+  end
 
   def get_profile_image
     unless profile_image.attached?

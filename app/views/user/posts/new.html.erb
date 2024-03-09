@@ -2,15 +2,24 @@
 
 <%= form_with model: @post do |f| %>
 
-  <h4>画像</h4>
-  <%= f.file_field :image, accept: "image/*" %>
-
   <h4>タイトル</h4>
   <%= f.text_field :title %>
 
   <h4>本文</h4>
-  <%= f.text_area :body %>
+  <%= f.rich_text_area :content %>
 
   <%= f.submit '投稿する' %>
 
 <% end %>
+
+<script>
+document.addEventListener("trix-attachment-add", function(event) {
+  var attachment = event.attachment;
+  if (attachment.file) {
+    if (attachment.file.size > 10 * 1024 * 1024) {
+      alert("画像のサイズは10MB以下にしてください。");
+      attachment.remove();
+    }
+  }
+});
+</script>

@@ -21,12 +21,11 @@ Rails.application.routes.draw do
   # ユーザー
   scope module:  :user do
     root to: "homes#top"
-    get "about" => 'homes#about', as: 'about'
-    get "users/my_page" => "users#show"
+    get "about" => 'homes#about', as: "about"
+    get "users/:id" => "users#show", as: "user"
     get "users/information/edit" => "users#edit"
     patch "users/information" => "users#update"
     get "/search", to: "searches#search"
-    resources :pets, only: [:index, :update, :destroy, :create, :edit, :show ,:new]
 
     resources :posts, only: [:create, :new, :index, :show, :edit, :destroy, :update] do
       resources :post_comments, only: [:create, :destroy]
@@ -38,6 +37,7 @@ Rails.application.routes.draw do
     end
 
     resources :users, only: [:show, :edit, :update] do
+      resources :pets, only: [:index, :update, :destroy, :create, :edit, :show ,:new]
       resource :relationships, only: [:create, :destroy]
       get "followings" =>"relationships#followings", as: "followings"
       get "followers" =>"relationships#followers", as: "followers"
@@ -49,6 +49,6 @@ Rails.application.routes.draw do
     namespace :admin do
       get "/" => 'homes#top'
       resources :posts, only: [:index, :show]
-      resources :users, only: [:index, :show, :edit]
+      resources :users, only: [:index, :show, :edit, :update]
   end
 end

@@ -7,11 +7,11 @@
             <th>ユーザーネーム</th>
             <td><%= @post.user.nickname %></td>
           </tr>
-        <% if @post.image.attached? %>
+        <% if @post.images.attached? %>
           <tr>
             <th>投稿した画像</th>
             <td class="text-center">
-              <%= image_tag @post.image, size: "200x200" %>
+              <%= image_tag @post.images.variant(resize: "100x100") %>
             </td>
           </tr>
         <% end %>
@@ -21,7 +21,7 @@
           </tr>
           <tr>
             <th>本文</th>
-            <td><%= @post.body %></td>
+            <td><%= @post.content %></td>
           </tr>
           <tr>
             <th>投稿日</th>

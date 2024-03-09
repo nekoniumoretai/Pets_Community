@@ -1,5 +1,11 @@
 <div class="container">
-  <h1 class="mt-4 mb-4 text-center"><%= current_user.nickname %>さんのペットたち</h1>
+  <h1 class="mt-4 mb-4 text-center">
+    <% if @user == current_user %>
+      <%= current_user.nickname %>さんのペットたち
+    <% else %>
+      <%= @user.nickname %>さんのペットたち
+    <% end %>
+  </h1>
   <% if @pets.any? %>
     <div class="row">
       <% @pets.each do |pet| %>
@@ -12,7 +18,7 @@
             <% end %>
             <div class="card-body">
               <h5 class="card-title text-center">
-                <%= link_to pet.name, pet_path(pet) %>
+                <%= link_to pet.name, user_pets_path(pet) %>
               </h5>
               <p class="card-text">性別: <%= pet.gender %></p>
               <p class="card-text">誕生日: <%= pet.birthday %></p>
@@ -25,8 +31,10 @@
     </div>
   <% else %>
     <p class="text-center">ペットが登録されていません。</p>
-    <div class="text-center">
-      <%= link_to "ペットを登録する", new_pet_path, class: "btn btn-primary" %>
-    </div>
+    <% if @user == current_user %>
+      <div class="text-center">
+        <%= link_to "ペットを登録する", new_pet_path, class: "btn btn-primary" %>
+      </div>
+    <% end %>
   <% end %>
 </div>
