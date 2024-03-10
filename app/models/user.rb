@@ -3,10 +3,13 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-
+  
+  has_one_attached :profile_image
   has_many :posts, dependent: :destroy
   has_many :pets, dependent: :destroy
-   has_one_attached :profile_image
+  has_many :post_comments, dependent: :destroy
+  has_many :favorites, dependent: :destroy
+  
 
   def my_page_data
     {
@@ -14,7 +17,7 @@ class User < ApplicationRecord
       email: self.email
     }
   end
-  
+
   # ユーザーがアクティブである場合のみ認証する
   def active_for_authentication?
     super && is_active?

@@ -27,7 +27,7 @@ Rails.application.routes.draw do
     patch "users/information" => "users#update"
     get "/search", to: "searches#search"
 
-    resources :posts, only: [:create, :new, :index, :show, :edit, :destroy, :update] do
+    resources :posts do
       resources :post_comments, only: [:create, :destroy]
       resource :favorites, only: [:create, :destroy]
     end
@@ -37,7 +37,7 @@ Rails.application.routes.draw do
     end
 
     resources :users, only: [:show, :edit, :update] do
-      resources :pets, only: [:index, :update, :destroy, :create, :edit, :show ,:new]
+      resources :pets
       resource :relationships, only: [:create, :destroy]
       get "followings" =>"relationships#followings", as: "followings"
       get "followers" =>"relationships#followers", as: "followers"

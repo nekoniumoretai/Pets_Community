@@ -37,6 +37,8 @@
           </tr>
         </tbody>
       </table>
+      <%= render partial: 'comment', locals: { post: @post, post_comment: PostComment.new } %>
+      <%= render 'favorites', post: @post %>
     </div>
   </div>
 </div>

@@ -1,5 +1,5 @@
 class User::PetsController < ApplicationController
-
+  before_action :get_pets, only: [:show, :edit, :update, :destroy]
 
   def new
     @pet = Pet.new
@@ -11,7 +11,7 @@ class User::PetsController < ApplicationController
     @pet = Pet.new(pet_params)
     @pet.user_id = current_user.id
     if @pet.save
-      redirect_to pets_path(@pet), notice: "登録しました"
+      redirect_to user_pets_path(current_user), notice: "登録しました"
     else
       @pets = Pet.all
       render 'new'
@@ -19,20 +19,15 @@ class User::PetsController < ApplicationController
   end
 
   def index
-    @pets = Pet.order(created_at: :desc)
     @user = User.find(params[:user_id])
+    @pets = @user.pets.order(created_at: :desc)
   end
 
-  def show
-    @pet = Pet.find(params[:id])
-  end
+  def show; end
 
-  def edit
-    @pet = Pet.find(params[:id])
-  end
+  def edit; end
 
   def update
-    @pet = Pet.find(params[:id])
     birthday = "#{params[:pet][:birthday_year]}-#{params[:pet][:birthday_month]}-#{params[:pet][:birthday_day]}"
     params[:pet][:birthday] = birthday
     if @pet.update(pet_params)
@@ -43,19 +38,14 @@ class User::PetsController < ApplicationController
   end
 
   def destroy
-    pet = Pet.find(params[:id])
-    pet.delete
+    @pet.delete
     redirect_to pets_path, notice: "情報を削除しました"
   end
 
   private
 
-  def set_user
-     @user = User.find(params[:user_id])
-  end
-
-  def set_pets
-    @pets = @user.pets.order(created_at: :desc)
+  def get_pets
+    @pet = Pet.find(params[:id])
   end
 
   def pet_params

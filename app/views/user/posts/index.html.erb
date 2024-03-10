@@ -27,6 +27,12 @@
             <td><strong>本文</strong></td>
             <td><%= strip_tags(post.content.to_s).truncate(50) %></td>
           </tr>
+          <tr>
+            <td>
+              <p><%= link_to "#{post.post_comments.count}コメント", post_path(post.id) %></p>
+              <p><%= render 'favorites', post: post %></p>
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>

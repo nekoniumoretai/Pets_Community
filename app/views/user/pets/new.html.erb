@@ -1,6 +1,6 @@
 <div class="container">
   <h1 class="mt-4 mb-4">ペット登録画面</h1>
-  <%= form_with model: @pet, class: "mt-4" do |f| %>
+  <%= form_with model: @pet, url: user_pets_path, class: "mt-4" do |f| %>
     <table class="table">
       <tbody>
         <tr>

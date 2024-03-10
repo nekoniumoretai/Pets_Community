@@ -1,10 +1,6 @@
 <div class="container">
   <h1 class="mt-4 mb-4 text-center">
-    <% if @user == current_user %>
-      <%= current_user.nickname %>さんのペットたち
-    <% else %>
-      <%= @user.nickname %>さんのペットたち
-    <% end %>
+    <%= @user.nickname %>さんのペットたち
   </h1>
   <% if @pets.any? %>
     <div class="row">
@@ -18,7 +14,7 @@
             <% end %>
             <div class="card-body">
               <h5 class="card-title text-center">
-                <%= link_to pet.name, user_pets_path(pet) %>
+                <%= link_to pet.name, user_pet_path(@user, pet) %>
               </h5>
               <p class="card-text">性別: <%= pet.gender %></p>
               <p class="card-text">誕生日: <%= pet.birthday %></p>
@@ -31,10 +27,10 @@
     </div>
   <% else %>
     <p class="text-center">ペットが登録されていません。</p>
-    <% if @user == current_user %>
-      <div class="text-center">
-        <%= link_to "ペットを登録する", new_pet_path, class: "btn btn-primary" %>
-      </div>
-    <% end %>
+  <% end %>
+  <% if @user == current_user %>
+    <div class="text-center">
+      <%= link_to "ペットを登録する", new_user_pet_path, class: "btn btn-primary" %>
+    </div>
   <% end %>
 </div>
