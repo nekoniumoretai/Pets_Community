@@ -3,7 +3,7 @@
     <div class="col-md-8 mx-auto">
       <h1>ペットの編集画面</h1>
 
-      <%= form_with model: @pet, url: pet_path(@pet.id), method: :patch do |f| %>
+      <%= form_with model: @pet, url: user_pet_path(@pet.id), method: :patch do |f| %>
         <table class="table">
           <tbody>
             <tr>
@@ -45,6 +45,7 @@
               </tr>
               <td colspan="2" class="text-center">
                 <%= f.submit '保存', class: "btn btn-primary" %>
+                <%= link_to "削除", user_pet_path(@pet), method: :delete, data: { confirm:"削除しますか？" }, class:"btn btn-danger ml-5" %>
               </td>
             </tr>
           </tbody>

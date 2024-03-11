@@ -1,8 +1,9 @@
 class User::UsersController < ApplicationController
   before_action :check_user_status, only: [:edit, :update]
+  before_action :get_user, only: [:show, :favorites]
 
   def show
-    @user = User.find(params[:id])
+    @users = User.all
     @user_data = @user.my_page_data
   end
 
@@ -19,6 +20,12 @@ class User::UsersController < ApplicationController
     end
   end
 
+  def favorites
+    favorite_post_ids = Favorite.where(user_id: @user.id).pluck(:post_id)
+    @favorite_posts = Post.where(id: favorite_post_ids)
+  end
+
+
   private
 
   def check_user_status
@@ -26,6 +33,10 @@ class User::UsersController < ApplicationController
     if @user.is_active == false
       redirect_to root_path, alert: "このアカウントは停止されています。"
     end
+  end
+
+  def get_user
+    @user = User.find(params[:id])
   end
 
   def user_params

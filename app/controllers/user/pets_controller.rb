@@ -31,7 +31,7 @@ class User::PetsController < ApplicationController
     birthday = "#{params[:pet][:birthday_year]}-#{params[:pet][:birthday_month]}-#{params[:pet][:birthday_day]}"
     params[:pet][:birthday] = birthday
     if @pet.update(pet_params)
-      redirect_to pet_path(@pet.id), notice: "登録内容を変更しました"
+      redirect_to user_pet_path(@pet.id), notice: "登録内容を変更しました"
     else
       render 'edit'
     end
@@ -39,7 +39,7 @@ class User::PetsController < ApplicationController
 
   def destroy
     @pet.delete
-    redirect_to pets_path, notice: "情報を削除しました"
+    redirect_to user_pets_path(current_user), notice: "情報を削除しました"
   end
 
   private

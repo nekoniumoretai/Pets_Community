@@ -9,7 +9,7 @@
             <td><%= link_to post.user.nickname, user_path(post.user) %></td>
           </tr>
           <!-- 画像が投稿されているかを確認。無ければ投稿画像欄ごと非表示にする -->
-          <% if post.image.attached? %>
+          <% if post.images.attached? %>
             <tr>
               <td colspan="2" class="text-center">
                 <%= image_tag post.image, size: "50x50" %>
@@ -23,7 +23,7 @@
           <tr>
             <!-- 投稿内容を30文字まで表示させる -->
             <td><strong>本文</strong></td>
-            <td><%= truncate(post.body, length: 30) %></td>
+            <td><%= strip_tags(post.content.to_s).truncate(30)  %></td>
           </tr>
         </tbody>
       </table>

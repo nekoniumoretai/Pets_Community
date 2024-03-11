@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
     if resource.is_a?(Admin)
       admin_path
     elsif resource.is_a?(User)
-      root_path
+      user_path(current_user)
     else
       super
     end

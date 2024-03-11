@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   end
 
   devise_scope :user do
+    post "users/guest_sign_in", to: "users/sessions#guest_sign_in"
     get '/users/sign_out' => 'devise/sessions#destroy'
   end
 
@@ -41,6 +42,9 @@ Rails.application.routes.draw do
       resource :relationships, only: [:create, :destroy]
       get "followings" =>"relationships#followings", as: "followings"
       get "followers" =>"relationships#followers", as: "followers"
+      member do
+        get :favorites
+      end
     end
 
   end
@@ -50,5 +54,6 @@ Rails.application.routes.draw do
       get "/" => 'homes#top'
       resources :posts, only: [:index, :show]
       resources :users, only: [:index, :show, :edit, :update]
+      resources :post_comments, only: [:index, :destroy]
   end
 end

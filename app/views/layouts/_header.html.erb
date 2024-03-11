@@ -19,6 +19,9 @@
             <%= link_to "ユーザーの投稿を確認する", admin_posts_path, class: 'nav-link' %>
           </li>
           <li class="nav-item">
+            <%= link_to "コメント一覧を確認する", admin_post_comments_path, class: 'nav-link' %>
+          </li>
+          <li class="nav-item">
             <%= link_to "登録しているユーザーを確認する", admin_users_path, class: 'nav-link' %>
           </li>
           <li class="nav-item">
@@ -45,7 +48,7 @@
             <%= link_to "すべてのコミュニティを見る", groups_path, class: 'nav-link' %>
           </li>
           <li class="nav-item">
-            <%= link_to "いいねした投稿投稿を見る", class: 'nav-link' %>
+            <%= link_to "いいねした投稿投稿を見る", favorites_user_path(current_user), class: 'nav-link' %>
           </li>
           <li class="nav-item">
             <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'nav-link' %>

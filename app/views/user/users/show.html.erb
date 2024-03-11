@@ -15,6 +15,13 @@
         <td><%= @user.nickname %></td>
       </tr>
       <tr>
+        <td></td>
+        <td>
+          フォロー数: <%= @user.followings.count %>
+          フォロワー数: <%= @user.followers.count %>
+        </td>
+      </tr>
+      <tr>
         <% if @user == current_user %>
           <th>メールアドレス</th>
             <td><%= @user.email %></td>
