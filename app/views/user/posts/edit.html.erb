@@ -12,6 +12,7 @@
     </div>
     <div style="text-align: center;">
       <%= f.submit '保存', class: "btn btn-primary" %>
+      <%= link_to "削除", post_path(@post), method: :delete, data: { confirm:"削除しますか？" }, class:"btn btn-danger ml-5" %>
     </div>
   <% end %>
 </div>
