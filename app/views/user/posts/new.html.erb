@@ -1,7 +1,18 @@
 <h1>新規投稿画面</h1>
 
-<%= render 'user/posts/form', post: @post %>
 <%= form_with model: @post do |f| %>
+
+  <div class="check_box">
+    <span>タグ</span>
+    <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) do |tag| %>
+      <div>
+        <%= tag.label do %>
+          <%= tag.check_box %>
+          <%= tag.text %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
 
   <h4>タイトル</h4>
   <%= f.text_field :title %>
@@ -12,15 +23,3 @@
   <%= f.submit '投稿する' %>
 
 <% end %>
-
-<script>
-document.addEventListener("trix-attachment-add", function(event) {
-  var attachment = event.attachment;
-  if (attachment.file) {
-    if (attachment.file.size > 10 * 1024 * 1024) {
-      alert("画像のサイズは10MB以下にしてください。");
-      attachment.remove();
-    }
-  }
-});
-</script>

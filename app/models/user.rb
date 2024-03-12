@@ -37,6 +37,7 @@ class User < ApplicationRecord
     super && is_active?
   end
 
+  # ユーザーのプロフィールイメージのメソッド
   def get_profile_image
     unless profile_image.attached?
       file_path = Rails.root.join('app/assets/images/no_image.jpg')
@@ -45,6 +46,7 @@ class User < ApplicationRecord
     profile_image.variant(resize_to_limit: [100, 100]).processed
   end
 
+  # フォロー・フォロワーに関してのメソッド
   def follow(user_id)
     relationships.create(followed_id: user_id)
   end
@@ -55,5 +57,18 @@ class User < ApplicationRecord
 
   def following?(user)
     followings.include?(user)
+  end
+
+  # 検索機能のメソッド
+  def self.search_for(content, method)
+    if method == 'perfect'
+      User.where(nickname: content)
+    elsif method == 'forward'
+      User.where('nickname LIKE ?', content + '%')
+    elsif method == 'backward'
+      User.where('nickname LIKE ?', '%' + content)
+    else
+      User.where('nickname LIKE ?', '%' + content + '%')
+    end
   end
 end

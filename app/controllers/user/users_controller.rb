@@ -2,6 +2,9 @@ class User::UsersController < ApplicationController
   before_action :check_user_status, only: [:edit, :update]
   before_action :get_user, only: [:show, :favorites]
 
+  def index
+    @users = User.all
+  end
   def show
     @users = User.all
     @user_data = @user.my_page_data

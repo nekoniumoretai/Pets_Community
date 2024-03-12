@@ -6,9 +6,7 @@ class User::PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
-    # tag_list = params[:post][:tag_name]
     if @post.save
-      # @post.save_tag(tag_list)
       redirect_to posts_path(@post), notice: "投稿しました"
     else
       @posts = Post.all
@@ -17,8 +15,7 @@ class User::PostsController < ApplicationController
   end
 
   def index
-    @tag_list = Tag.all
-    @posts = Post.order(created_at: :desc)
+    @posts =  params[:tag_id].present? ? Tag.find(params[:tag_id]).posts : Post.order(created_at: :desc)
   end
 
   def show

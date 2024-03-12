@@ -37,6 +37,9 @@
 
     <%= render 'layouts/header' %>
     <main>
+      <div class="d-flex justify-content-center mb-2">
+        <%= render 'user/searches/form' %>
+      </div>
       <%= yield %>
     </main>
     <%= render 'layouts/footer' %>
