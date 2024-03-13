@@ -1,19 +1,25 @@
 class User::PostCommentsController < ApplicationController
+  before_action :get_post, only: [:create, :destroy]
+
   def create
-    post = Post.find(params[:post_id])
     comment = current_user.post_comments.new(post_comment_params)
     comment.post_id = post.id
     comment.save
-    redirect_to post_path(post)
+     # create.jsとdestroy.jsを一体化させてrenderで呼び出す処理
+    render 'user/post_comments/create'
   end
 
   def destroy
-    post_comment = PostComment.find(params[:id])
+    post_comment = @post.post_comments.find(params[:id])
     post_comment.destroy
-    redirect_to post_path(post_comment.post_id)
+    render 'user/post_comments/create'
   end
 
   private
+
+  def get_post
+    @post = Post.find(params[:post_id])
+  end
 
   def post_comment_params
     params.require(:post_comment).permit(:comment)

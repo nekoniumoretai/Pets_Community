@@ -51,18 +51,11 @@
           </td>
         <% else %>
           <td colspan="2" class="text-center">
-            <%= link_to "#{@user.nickname}さんのペットを見る", user_pets_path(@user), class: "btn btn-primary" %>
+            <%= link_to "#{@user.nickname}さんの投稿を見る", posts_path(@user), class: "btn btn-primary" %>
+            <%= link_to "#{@user.nickname}さんのペットを見る", user_pets_path(@user), class: "btn btn-primary mt-3" %>
           </td>
         <% end %>
       </tr>
     </tbody>
   </table>
 </div>
-
-<script>
-  // "続きを見る"リンクがクリックされたときの処理
-  document.getElementById("show-full-intro-link").addEventListener("click", function() {
-    document.getElementById("intro-short").style.display = "none";
-    document.getElementById("intro-full").style.display = "block";
-  });
-</script>

@@ -16,6 +16,7 @@ class User::PostsController < ApplicationController
 
   def index
     @posts =  params[:tag_id].present? ? Tag.find(params[:tag_id]).posts : Post.order(created_at: :desc)
+    @posts = @posts.page(params[:page]).per(20)
   end
 
   def show

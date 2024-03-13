@@ -15,7 +15,7 @@
 
 <div>
   <%= form_with model: [post, post_comment] do |f| %>
-    <%= f.text_area :comment, rows: '5', placeholder:"コメントをここに入力" %>
+    <%= f.text_area :comment, rows: '3', placeholder:"コメントをここに入力", class: "w-100", id: "comment_textarea" %>
     <%= f.submit "コメントする" %>
   <% end %>
 </div>

@@ -4,11 +4,12 @@ class User::UsersController < ApplicationController
   before_action :ensure_guest_user, only: [:edit]
 
   def index
-    @users = User.all
+    @users = User.page(params[:page])
   end
   def show
-    @users = User.all
+    @get_user = @user.posts.page(params[:page])
     @user_data = @user.my_page_data
+    @user_posts = @user.posts.order(created_at: :desc).page(params[:page]).per(20)
   end
 
   def edit
