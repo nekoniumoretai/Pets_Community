@@ -20,8 +20,12 @@ class User < ApplicationRecord
   def self.guest
     find_or_create_by!(email: GUEST_USER_EMAIL) do |user|
       user.password = SecureRandom.urlsafe_base64
-      user.name = "guestuser"
+      user.nickname = "guestuser"
     end
+  end
+
+  def guest_user?
+    email == GUEST_USER_EMAIL
   end
 
   # 以下ユーザー用メソッド

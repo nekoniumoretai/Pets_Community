@@ -44,7 +44,7 @@
         </td>
       </tr>
       <tr>
-        <% if @user == current_user %>
+        <% if current_user.email != "guest@example.com" %>
           <td colspan="2" class="text-center">
             <%= link_to "マイペット", user_pets_path(@user), class:"btn btn-primary" %>
             <%= link_to "マイ情報を編集する", edit_user_path(@user), class:"btn btn-success" %>
