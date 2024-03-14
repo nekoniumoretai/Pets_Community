@@ -46,7 +46,6 @@ Rails.application.routes.draw do
         get :favorites
       end
     end
-
   end
 
   # 管理者

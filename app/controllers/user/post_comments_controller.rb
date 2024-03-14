@@ -3,15 +3,16 @@ class User::PostCommentsController < ApplicationController
 
   def create
     comment = current_user.post_comments.new(post_comment_params)
-    comment.post_id = post.id
+    comment.post_id = @post.id
     comment.save
+    @post_comment = current_user.post_comments.new
      # create.jsとdestroy.jsを一体化させてrenderで呼び出す処理
     render 'user/post_comments/create'
   end
 
   def destroy
-    post_comment = @post.post_comments.find(params[:id])
-    post_comment.destroy
+    @post_comment = @post.post_comments.find(params[:id])
+    @post_comment.destroy
     render 'user/post_comments/create'
   end
 

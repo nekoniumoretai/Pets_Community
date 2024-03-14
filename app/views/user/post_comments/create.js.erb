@@ -1,6 +1,5 @@
-$('#comment_comment').html("<%= j(render 'user/post_comments/comment', post: @post, post_comment: @post_comment) %>");
-$('#comment_comment').html("<%= j(render 'user/post_comments/comment', post: @post, post_comment: @post_comment) %>");
-<!--action_nameがcreateと同じなら5行目のテキストエリアを空欄にする処理を実行する条件式-->
+$('#comments').html("<%= j(render 'user/post_comments/comment', post: @post, post_comment: @post_comment) %>");
+<!--action_nameがcreateと同じなら4行目のテキストエリアを空欄にする処理を実行する条件式-->
 <% if action_name == "create" %>
   $('#comment_textarea').val("");
 <% end %>
