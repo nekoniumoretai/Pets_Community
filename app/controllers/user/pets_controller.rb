@@ -1,4 +1,5 @@
 class User::PetsController < ApplicationController
+  before_action :authenticate_user!
   before_action :get_pets, only: [:show, :edit, :update, :destroy]
 
   def new

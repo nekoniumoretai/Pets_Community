@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  namespace :user do
+    get 'group_messages/new'
+    get 'group_messages/index'
+  end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
   devise_for :admins, skip: [:passwords], controllers: {
@@ -33,17 +37,20 @@ Rails.application.routes.draw do
       resource :favorites, only: [:create, :destroy]
     end
 
-    resources :groups, only: [:create, :new, :index, :show, :edit, :update] do
+    resources :groups, only: [:create, :new, :index, :show, :edit, :update, :destroy] do
       resource :group_users, only: [:create, :destroy]
+      resources :group_messages, only: [:new, :create, :index, :destroy]
     end
 
     resources :users, only: [:show, :edit, :update] do
+      # resources :groups, only: [:index, :show], controller: 'user/groups'
       resources :pets
       resource :relationships, only: [:create, :destroy]
       get "followings" =>"relationships#followings", as: "followings"
       get "followers" =>"relationships#followers", as: "followers"
       member do
         get :favorites
+        get :groups
       end
     end
   end

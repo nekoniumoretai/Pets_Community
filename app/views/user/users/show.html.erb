@@ -23,12 +23,12 @@
       </tr>
       <tr>
         <% if @user == current_user %>
-          <th>メールアドレス</th>
+          <th>メールアドレス:</th>
             <td><%= @user.email %></td>
         <% end %>
       </tr>
       <tr>
-        <th>自己紹介</th>
+        <th>自己紹介:</th>
         <td>
           <div id="intro-short">
             <% if @user.introduction.present? %>
@@ -44,15 +44,15 @@
         </td>
       </tr>
       <tr>
-        <% if current_user.email != "guest@example.com" %>
+        <% if @user == current_user %>
           <td colspan="2" class="text-center">
             <%= link_to "マイペット", user_pets_path(@user), class:"btn btn-primary" %>
-            <%= link_to "マイ情報を編集する", edit_user_path(@user), class:"btn btn-success" %>
+            <%= link_to "マイ情報を編集する", edit_user_path(@user), class:"btn btn-success ml-5" %>
           </td>
         <% else %>
           <td colspan="2" class="text-center">
             <%= link_to "#{@user.nickname}さんの投稿を見る", posts_path(@user), class: "btn btn-primary" %>
-            <%= link_to "#{@user.nickname}さんのペットを見る", user_pets_path(@user), class: "btn btn-primary mt-3" %>
+            <%= link_to "#{@user.nickname}さんのペットを見る", user_pets_path(@user), class: "btn btn-info mt-3" %>
           </td>
         <% end %>
       </tr>

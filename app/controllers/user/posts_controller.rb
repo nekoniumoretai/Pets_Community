@@ -1,4 +1,7 @@
 class User::PostsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :get_post, only: [:show, :edit]
+
   def new
     @post = Post.new
   end
@@ -10,6 +13,7 @@ class User::PostsController < ApplicationController
       redirect_to posts_path(@post), notice: "投稿しました"
     else
       @posts = Post.all
+      flash.now[:alert] = "タイトルと本文を入力してください"
       render 'new'
     end
   end
@@ -20,14 +24,10 @@ class User::PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find(params[:id])
     @post_comment = PostComment.new
   end
 
-  def edit
-    @post = Post.find(params[:id])
-
-  end
+  def edit;end
 
   def update
     post = Post.find(params[:id])
@@ -37,11 +37,18 @@ class User::PostsController < ApplicationController
 
   def destroy
     post = Post.find(params[:id])
+    post.post_comments.destroy_all
+    post.favorites.destroy_all
+    post.tags.destroy_all
     post.delete
     redirect_to posts_path, notice: "投稿を削除しました"
   end
 
   private
+
+  def get_post
+    @post = Post.find(params[:id])
+  end
 
   def post_params
     params.require(:post).permit(:title, :content, tag_ids: [], images: [])

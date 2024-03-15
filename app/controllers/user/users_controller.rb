@@ -1,6 +1,7 @@
 class User::UsersController < ApplicationController
+  before_action :authenticate_user!
   before_action :check_user_status, only: [:edit, :update]
-  before_action :get_user, only: [:show, :favorites]
+  before_action :get_user, only: [:show, :favorites, :groups]
   before_action :ensure_guest_user, only: [:edit]
 
   def index
@@ -28,6 +29,11 @@ class User::UsersController < ApplicationController
   def favorites
     favorite_post_ids = Favorite.where(user_id: @user.id).pluck(:post_id)
     @favorite_posts = Post.where(id: favorite_post_ids)
+  end
+
+  def groups
+    group_user_ids = GroupUser.where(user_id: @user.id).pluck(:group_id)
+    @group_users = GroupUser.where(id: group_user_ids)
   end
 
 

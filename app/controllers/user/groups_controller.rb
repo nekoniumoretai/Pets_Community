@@ -8,32 +8,40 @@ class User::GroupsController < ApplicationController
 
   def create
     @group = Group.new(group_params)
-    @group.owner_id = cuurent_user.id
+    @group.owner_id = current_user.id
     if @group.save
-      redirect_to groups_path, method: :post
+      redirect_to groups_path, notice: "コミュニティを作成しました"
     else
+      flash.now[:alert] = "グループ名、グループ紹介文を入力してください"
       render 'new'
     end
   end
 
   def index
     @groups = Group.all
-    @user = User.find(current_user.id)
+    # @user = User.find(current_user.id)
   end
 
   def show
     @group = Group.find(params[:id])
-    @user = User.find(params[:id])
+    # @user = User.find(params[:id])
   end
 
-  def edit
-  end
+  def edit;end
 
   def update
     if @group.update(group_params)
-      redirect_to groups_path
+      redirect_to groups_path(@group), notice: "コミュニティを編集しました"
     else
+      flash.now[:alert] = "グループ名、グループ紹介文を入力してください"
       render 'edit'
+    end
+  end
+
+  def destroy
+    delete_group = Group.find(params[:id])
+    if delete_group.destroy
+       redirect_to groups_path, notice: 'グループを削除しました。'
     end
   end
 

@@ -1,44 +1,48 @@
-<h1 class="mb-4">みんなの投稿（posts.index）</h1>
-<div class="row">
-  <%= form_tag posts_path, method: :get, class: 'boards__searchForm' do %>
-    <%= select_tag :tag_id, options_from_collection_for_select(Tag.all, :id, :name, params[:tag_id]), { prompt: 'タグで絞り込み検索', onchange: 'submit(this.form);'} %>
-  <% end %>
-  <% @posts.each do |post| %>
-    <div class="col-md-4 mb-4">
-      <div class="card">
-        <% if post.images.attached? %>
-          <div class="card-img-top">
-            <% post.images.each do |image| %>
-              <%= image_tag image, class: "card-img-top", alt: "投稿画像" %>
-            <% end %>
-          </div>
-        <% end %>
-        <div class="card-body">
-          <h5 class="card-title"><%= link_to post.title, post_path(post) %></h5>
-          <!--投稿内容を50文字まで表示させる-->
-          <p class="card-text"><%= strip_tags(post.content.to_s).truncate(50) %></p>
-        </div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">
-            <strong>ユーザーネーム：</strong>
-            <%= link_to post.user.nickname, user_path(post.user) %>
-            <%= render 'user/relationships/btn', post: post %>
-          </li>
-          <li class="list-group-item">
-            <strong>タグ：</strong>
-            <% post.tags.each do |tag| %>
-              <span class="badge badge-secondary"><%= tag.name %></span>
-            <% end %>
-          </li>
-          <li class="list-group-item">
-            <p><%= link_to "#{post.post_comments.count}コメント", post_path(post.id), class: "btn btn-sm btn-outline-secondary" %></p>
-            <div id="favorite_btn_<%= post.id %>">
-              <p><%= render 'user/favorites/favorite', post: post %></p>
+<div class="container">
+  <div class="col-md-3 offset-md-9">
+    <%= form_tag posts_path, method: :get, class: 'boards__searchForm mb-4' do %>
+      <%= select_tag :tag_id, options_from_collection_for_select(Tag.all, :id, :name, params[:tag_id]), { prompt: 'タグで絞り込み検索', class: 'form-control', onchange: 'submit(this.form);'} %>
+    <% end %>
+  </div>
+  <h1 class="mb-4 text-center">みんなの投稿</h1>
+  <div class="row">
+    <% @posts.each do |post| %>
+      <div class="col-md-4 mb-4">
+        <div class="card h-100">
+          <% if post.images.attached? %>
+            <div class="card-img-top">
+              <% post.images.each do |image| %>
+                <%= image_tag image, class: "card-img-top", alt: "投稿画像" %>
+              <% end %>
             </div>
-          </li>
-        </ul>
+          <% end %>
+          <div class="card-body">
+            <h5 class="card-title"><%= link_to post.title, post_path(post) %></h5>
+            <!--投稿内容を50文字まで表示させる-->
+            <p class="card-text"><%= strip_tags(post.content.to_s).truncate(50) %></p>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <strong>ユーザーネーム：</strong>
+              <%= link_to post.user.nickname, user_path(post.user) %>
+              <%= render 'user/relationships/btn', post: post %>
+            </li>
+            <li class="list-group-item">
+              <strong>タグ：</strong>
+              <% post.tags.each do |tag| %>
+                <span class="badge badge-secondary"><%= tag.name %></span>
+              <% end %>
+            </li>
+            <li class="list-group-item">
+              <p><%= link_to "#{post.post_comments.count}コメント", post_path(post.id), class: "btn btn-sm btn-outline-secondary" %></p>
+              <div id="favorite_btn_<%= post.id %>">
+                <p><%= render 'user/favorites/favorite', post: post %></p>
+              </div>
+            </li>
+          </ul>
+        </div>
       </div>
-    </div>
-  <% end %>
-  <%= paginate @posts %>
+    <% end %>
+  </div>
 </div>
+<%= paginate @posts %>

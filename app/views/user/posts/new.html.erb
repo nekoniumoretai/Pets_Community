@@ -1,25 +1,39 @@
-<h1>新規投稿画面</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 mx-auto mt-3">
+      <h1 class="text-center">新規投稿画面</h1>
+      <%= form_with model: @post do |f| %>
 
-<%= form_with model: @post do |f| %>
+        <div class="form-group">
+          <h4>タグ</h4>
+          <div class="row table-bordered">
+            <% Tag.all.each do |tag| %>
+              <div class="col-md-3">
+                <div class="form-check">
+                  <%= f.check_box :tag_ids, { multiple: true, class: "form-check-input" }, tag.id, nil %>
+                  <%= label_tag "post_tag_ids_#{tag.id}", tag.name, class: "form-check-label" %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
 
-  <div class="check_box">
-    <span>タグ</span>
-    <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) do |tag| %>
-      <div>
-        <%= tag.label do %>
-          <%= tag.check_box %>
-          <%= tag.text %>
-        <% end %>
-      </div>
-    <% end %>
+        <div class="form-group">
+          <h4>タイトル</h4>
+          <%= f.text_field :title, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <h4>本文</h4>
+          <%= f.rich_text_area :content, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.submit '投稿する', class: "btn btn-primary" %>
+          <p class="mt-2">※投稿後、画像はリサイズされます</p>
+        </div>
+
+      <% end %>
+    </div>
   </div>
-
-  <h4>タイトル</h4>
-  <%= f.text_field :title %>
-
-  <h4>本文</h4>
-  <%= f.rich_text_area :content %>
-
-  <%= f.submit '投稿する' %><p>※投稿後、画像はリサイズされます</p>
-
-<% end %>
+</div>

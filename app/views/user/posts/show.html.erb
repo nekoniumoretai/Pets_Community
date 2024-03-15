@@ -3,49 +3,65 @@
     <div class="col-md-8 mx-auto">
       <div class="card">
         <div class="card-body">
-          <table class="table table-bordered">
-            <tbody>
-              <tr>
-                <th>ユーザーネーム</th>
-                <td><%= @post.user.nickname %></td>
-              </tr>
-              <% if @post.images.attached? %>
-                <tr>
-                  <th>投稿した画像</th>
-                  <td class="text-center">
-                    <%= image_tag @post.images.variant(resize: "100x100") %>
-                  </td>
-                </tr>
+          <div class="row">
+            <div class="col-6">
+              <strong>ユーザーネーム：</strong>
+            </div>
+            <div class="col-6">
+              <%= @post.user.nickname %>
+            </div>
+          </div>
+          <% if @post.images.attached? %>
+            <div class="row">
+              <div class="col-6">
+                <strong>投稿した画像：</strong>
+              </div>
+              <div class="col-6 text-center">
+                <%= image_tag @post.images.variant(resize: "100x100") %>
+              </div>
+            </div>
+          <% end %>
+          <div class="row">
+            <div class="col-6">
+              <strong>タイトル：</strong>
+            </div>
+            <div class="col-6">
+              <%= @post.title %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <strong>本文：</strong>
+            </div>
+            <div class="col-6">
+              <%= @post.content %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <strong>投稿日：</strong>
+            </div>
+            <div class="col-6">
+              <%= @post.created_at.strftime('%Y/%m/%d') %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <strong>タグ：</strong>
+            </div>
+            <div class="col-6">
+              <% @post.tags.each do |tag| %>
+                <%= tag.name %>
               <% end %>
-              <tr>
-                <th>タイトル</th>
-                <td><%= @post.title %></td>
-              </tr>
-              <tr>
-                <th>本文</th>
-                <td><%= @post.content %></td>
-              </tr>
-              <tr>
-                <th>投稿日</th>
-                <td><%= @post.created_at.strftime('%Y/%m/%d') %></td>
-              </tr>
-              <tr>
-                <th>タグ</th>
-                <td>
-                  <% @post.tags.each do |tag| %>
-                    <%= tag.name %>
-                  <% end %>
-                </td>
-              </tr>
-              <tr>
-                <% if @post.user == current_user %>
-                  <td colspan="2" class="text-center">
-                    <%= link_to "編集", edit_post_path(@post), class:"btn btn-success" %>
-                  </td>
-                <% end %>
-              </tr>
-            </tbody>
-          </table>
+            </div>
+          </div>
+          <% if @post.user == current_user %>
+            <div class="row">
+              <div class="col-12 text-center">
+                <%= link_to "編集", edit_post_path(@post), class:"btn btn-success" %>
+              </div>
+            </div>
+          <% end %>
         </div>
       </div>
       <div id="comments">
