@@ -1,2 +1,35 @@
-<h1>User::GroupMessages#new</h1>
-<p>Find me in app/views/user/group_messages/new.html.erb</p>
+<div class="container">
+  <h1><%= @group.name %>の部屋</h1>
+
+  <%= form_with model: @message, url: group_group_messages_path, method: :post do |f| %>
+    <div class="form-group">
+      <%= f.text_area :body, class: "form-control" %>
+    </div>
+    <div class="row">
+      <div class="col-md-3 mx-auto">
+        <div class="form-group">
+          <%= f.submit '喋る', class: 'btn btn-primary btn-block' %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <% @messages.each do |message| %>
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="nickname">
+          <%= message.user.nickname %>
+        </h5>
+        <div class="message">
+          <%= simple_format(message.body, sanitize: true, class: 'm-0') %>
+        </div>
+        <div class="time text-right">
+          <small class="text-black-50">
+            <%= message.created_at.in_time_zone('Asia/Tokyo').strftime('%Y年%m月%d日 %H:%M') %>
+          </small>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+</div>

@@ -1,13 +1,23 @@
 <div>
   <p>コメント件数：<%= post.post_comments.count %></p>
   <% post.post_comments.each do |post_comment| %>
-    <div>
-      <p><%= image_tag post_comment.user.get_profile_image %></p>
-      <p><%= post_comment.user.nickname %></p>
-      <p><%= post_comment.comment %></p>
-      <p><%= post_comment.created_at.strftime('%Y/%m/%d') %></p>
+    <div style="display: flex; align-items: center;">
+      <span style="margin-right: 10px;">
+        <%= image_tag post_comment.user.get_profile_image, size: "50x50" %>
+      </span>
+      <span style="margin-right: 10px;">
+        <%= post_comment.user.nickname %>
+      </span>
+      <span style="margin-right: 10px;">
+        <%= post_comment.comment %>
+      </span>
+      <span style="margin-right: 10px;">
+        <%= post_comment.created_at.strftime('%Y/%m/%d') %>
+      </span>
       <% if post_comment.user == current_user %>
-        <%= link_to "削除", post_post_comment_path(post_comment.post, post_comment), method: :delete, remote: true %>
+        <span>
+          <%= link_to "削除", post_post_comment_path(post_comment.post, post_comment), method: :delete, remote: true %>
+        </span>
       <% end %>
     </div>
   <% end %>
@@ -15,7 +25,7 @@
 
 <div>
   <%= form_with model: [post, post_comment], local: false do |f| %>
-    <%= f.text_area :comment, rows: '3', placeholder:"コメントをここに入力", class: "w-100", id: "comment_textarea" %>
+    <%= f.text_area :comment, rows: '3', placeholder:"コメントをここに入力", class: "w-50", id: "comment_textarea" %>
     <%= f.submit "コメントする" %>
   <% end %>
 </div>

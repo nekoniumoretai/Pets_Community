@@ -37,9 +37,10 @@ Rails.application.routes.draw do
       resource :favorites, only: [:create, :destroy]
     end
 
+    get "group_messages" => "group_messages#index"
     resources :groups, only: [:create, :new, :index, :show, :edit, :update, :destroy] do
       resource :group_users, only: [:create, :destroy]
-      resources :group_messages, only: [:new, :create, :index, :destroy]
+      resources :group_messages, only: [:new, :create]
     end
 
     resources :users, only: [:show, :edit, :update] do

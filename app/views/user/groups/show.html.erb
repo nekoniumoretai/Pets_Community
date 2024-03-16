@@ -17,7 +17,7 @@
               <%= link_to '編集', edit_group_path(@group), class: "btn btn-sm btn-success mr-2" %>
               <span>※このコミュニティのオーナーです</span>
             <% elsif @group.includesUser?(current_user) %>
-              <%= link_to 'コミュニティチャットを始める', '#', class: "btn btn-sm btn-primary mr-2" %><span>遷移先指定する</span>
+              <%= link_to 'コミュニティチャットを始める', new_group_group_message_path(@group), class: "btn btn-sm btn-primary mr-2" %><span>遷移先指定する</span>
               <%= link_to 'コミュニティから抜ける', group_group_users_path(@group), method: :delete, class: "btn btn-sm btn-danger" %>
             <% else %>
               <%= link_to 'コミュニティに参加する', group_group_users_path(@group), method: :post, class: "btn btn-sm btn-success" %>

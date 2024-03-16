@@ -33,7 +33,8 @@ class User::UsersController < ApplicationController
 
   def groups
     group_user_ids = GroupUser.where(user_id: @user.id).pluck(:group_id)
-    @group_users = GroupUser.where(id: group_user_ids)
+    owner_group_ids = Group.where(owner_id: @user.id).ids
+    @group_users = Group.where(id: group_user_ids + owner_group_ids).order(created_at: :desc)
   end
 
 
