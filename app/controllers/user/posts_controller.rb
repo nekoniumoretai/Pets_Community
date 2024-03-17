@@ -7,8 +7,7 @@ class User::PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(post_params)
-    @post.user_id = current_user.id
+    @post = current_user.posts.new(post_params)
     if @post.save
       redirect_to posts_path(@post), notice: "投稿しました"
     else

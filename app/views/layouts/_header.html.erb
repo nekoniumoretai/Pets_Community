@@ -48,7 +48,23 @@
             <%= link_to "すべてのコミュニティを見る", groups_path, class: 'nav-link' %>
           </li>
           <li class="nav-item">
-            <%= link_to "いいねした投稿投稿を見る", favorites_user_path(current_user), class: 'nav-link' %>
+            <%= link_to "いいねした投稿を見る", favorites_user_path(current_user), class: 'nav-link' %>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              通知
+              <span class="badge badge-danger"><%= current_user.notifications.where(read: false).count %></span>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <% if current_user.notifications.where(read: false).any? %>
+                <small class="dropdown-item disabled">直近5件の未読の通知を表示しています</small>
+                <% current_user.notifications.where(read: false).limit(5).order(created_at: :desc).each do |notification| %>
+                  <%= link_to notification.message, notification_path(notification), method: :patch, class: "dropdown-item" %>
+                <% end %>
+              <% else %>
+                <span class="dropdown-item disabled">未読の通知はありません</span>
+              <% end %>
+            </div>
           </li>
           <li class="nav-item">
             <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'nav-link' %>

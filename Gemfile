@@ -59,3 +59,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise'
 gem 'actiontext'
 gem 'kaminari', '~>1.2.1'
+gem 'activerecord-import'

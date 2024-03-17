@@ -23,27 +23,31 @@
   </head>
 
   <body>
-    <% if flash[:notice] %>
-      <div class="alert alert-success" role="alert">
-        <%= flash[:notice] %>
-      </div>
-    <% end %>
-
-    <% if flash[:alert] %>
-      <div class="alert alert-danger" role="alert">
-        <%= flash[:alert] %>
-      </div>
-    <% end %>
-
-    <%= render 'layouts/header' %>
-    <main>
-      <div class="d-flex justify-content-end mb-2 mt-2 mr-4">
-        <%= render 'user/searches/form' %>
-      </div>
-      <div class="style">
-        <%= yield %>
-      </div>
-    </main>
-    <%= render 'layouts/footer' %>
+    <div class="footerFixed">
+      <% if flash[:notice] %>
+        <div class="alert alert-success" role="alert">
+          <%= flash[:notice] %>
+        </div>
+      <% end %>
+  
+      <% if flash[:alert] %>
+        <div class="alert alert-danger" role="alert">
+          <%= flash[:alert] %>
+        </div>
+      <% end %>
+  
+      <%= render 'layouts/header' %>
+      <main>
+        <div class="d-flex justify-content-end mb-2 mt-2 mr-4">
+          <%= render 'user/searches/form' %>
+        </div>
+        <div class="style">
+          <%= yield %>
+        </div>
+      </main>
+      <footer>
+        <p>Pets_Community</p>
+      </footer>
+    </div>
   </body>
 </html>

@@ -14,10 +14,11 @@ class User::GroupMessagesController < ApplicationController
   def create
     @message = GroupMessage.new(group_message_params)
     if @message.save
-      redirect_to new_group_group_message_path(params[:group_id])
+      redirect_to new_group_group_message_path(params[:group_id]), notice: '送信しました'
     else
       @group = Group.find(params[:group_id])
       @messages = GroupMessage.where(group_id: params[:group_id]).order(created_at: :desc)
+      flash.now[:alert] = '内容を入力してください'
       render :new
     end
   end

@@ -31,6 +31,7 @@ Rails.application.routes.draw do
     get "users/information/edit" => "users#edit"
     patch "users/information" => "users#update"
     get "/search", to: "searches#search"
+    patch "notification/:id", to: "notifications#update", as: "notification"
 
     resources :posts do
       resources :post_comments, only: [:create, :destroy]
