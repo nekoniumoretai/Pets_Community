@@ -16,6 +16,9 @@ class User < ApplicationRecord
   has_many :group_users, dependent: :destroy
   has_many :notifications, dependent: :destroy
 
+  validates :nickname, presence: true
+  validates :email, presence: true
+
   # ゲストユーザー用メソッド
   GUEST_USER_EMAIL = "guest@example.com"
 

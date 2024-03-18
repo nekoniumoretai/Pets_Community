@@ -2,31 +2,19 @@
 <div class="row">
   <% @posts.each do |post| %>
     <div class="col-md-4 mb-4">
-      <table class="table table-bordered">
-        <tbody>
-          <tr>
-            <td><strong>ユーザーネーム</strong></td>
-            <td><%= link_to post.user.nickname, user_path(post.user) %></td>
-          </tr>
-          <!-- 画像が投稿されているかを確認。無ければ投稿画像欄ごと非表示にする -->
-          <% if post.images.attached? %>
-            <tr>
-              <td colspan="2" class="text-center">
-                <%= image_tag post.image, size: "50x50" %>
-              </td>
-            </tr>
-          <% end %>
-          <tr>
-            <td><strong>タイトル</strong></td>
-            <td><%= link_to post.title, post_path(post) %></td>
-          </tr>
-          <tr>
-            <!-- 投稿内容を30文字まで表示させる -->
-            <td><strong>本文</strong></td>
-            <td><%= strip_tags(post.content.to_s).truncate(30)  %></td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="card">
+        <% if post.images.attached? %>
+          <%= image_tag post.image, class: "card-img-top", alt: "投稿画像" %>
+        <% end %>
+        <div class="card-body">
+          <h5 class="card-title"><%= link_to post.title, post_path(post) %></h5>
+          <!--投稿内容を３０文字まで表示-->
+          <p class="card-text"><%= strip_tags(post.content.to_s).truncate(30) %></p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"><strong>ユーザーネーム: </strong><%= link_to post.user.nickname, user_path(post.user) %></li>
+        </ul>
+      </div>
     </div>
   <% end %>
 </div>

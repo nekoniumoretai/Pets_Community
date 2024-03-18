@@ -1,8 +1,4 @@
 Rails.application.routes.draw do
-  namespace :user do
-    get 'group_messages/new'
-    get 'group_messages/index'
-  end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
   devise_for :admins, skip: [:passwords], controllers: {
@@ -15,7 +11,7 @@ Rails.application.routes.draw do
   }
 
   devise_scope :admin do
-    get '/admin/sign_out' => 'devise/sessions#destroy'
+    get '/admins/sign_out' => 'devise/sessions#destroy'
   end
 
   devise_scope :user do
@@ -24,6 +20,12 @@ Rails.application.routes.draw do
   end
 
   # ユーザー
+
+  namespace :user do
+    get 'group_messages/new'
+    get 'group_messages/index'
+  end
+
   scope module:  :user do
     root to: "homes#top"
     get "about" => 'homes#about', as: "about"
@@ -45,7 +47,6 @@ Rails.application.routes.draw do
     end
 
     resources :users, only: [:show, :edit, :update] do
-      # resources :groups, only: [:index, :show], controller: 'user/groups'
       resources :pets
       resource :relationships, only: [:create, :destroy]
       get "followings" =>"relationships#followings", as: "followings"
@@ -58,7 +59,7 @@ Rails.application.routes.draw do
   end
 
   # 管理者
-    namespace :admin do
+  namespace :admin do
       get "/" => 'homes#top'
       resources :posts, only: [:index, :show]
       resources :users, only: [:index, :show, :edit, :update]

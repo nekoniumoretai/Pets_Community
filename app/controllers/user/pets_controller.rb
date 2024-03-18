@@ -14,7 +14,8 @@ class User::PetsController < ApplicationController
     if @pet.save
       redirect_to user_pets_path(current_user), notice: "登録しました"
     else
-      @pets = Pet.all
+      # @pets = Pet.all
+      flash.now[:alert] = "必須項目を入力してください"
       render 'new'
     end
   end
@@ -34,6 +35,7 @@ class User::PetsController < ApplicationController
     if @pet.update(pet_params)
       redirect_to user_pet_path(@pet.id), notice: "登録内容を変更しました"
     else
+      flash.now[:alert] = "必須項目を入力してください"
       render 'edit'
     end
   end

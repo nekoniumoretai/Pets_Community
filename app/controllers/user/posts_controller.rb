@@ -1,5 +1,5 @@
 class User::PostsController < ApplicationController
-  before_action :authenticate_user!
+  # before_action :authenticate_user!
   before_action :get_post, only: [:show, :edit]
 
   def new

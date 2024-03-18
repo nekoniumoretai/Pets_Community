@@ -13,6 +13,9 @@ import "popper.js";
 import "bootstrap";
 import "../stylesheets/application";
 
+import "skippr.min";
+import "script.js";
+
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()

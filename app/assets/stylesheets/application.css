@@ -51,22 +51,3 @@ figure.attachment img {
   width: 100px;
   height: 100px;
 }
-
-#intro-short {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  max-width: 100%;
-}
-
-#show-full-intro-link {
-  display: none; /* 最初は非表示 */
-}
-
-#intro-short:hover {
-  white-space: normal; /* hover時に全てのテキストを表示 */
-}
-
-#intro-short:hover + #show-full-intro-link {
-  display: inline; /* hover時に「続きを見る」リンクを表示 */
-}

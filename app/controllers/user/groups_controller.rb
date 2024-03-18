@@ -40,9 +40,8 @@ class User::GroupsController < ApplicationController
 
   def destroy
     delete_group = Group.find(params[:id])
-    if delete_group.destroy
-       redirect_to groups_path, notice: 'グループを削除しました。'
-    end
+    delete_group.destroy
+    redirect_to groups_path, notice: 'グループを削除しました。'
   end
 
   private

@@ -1,3 +1,24 @@
+<!--<div class="swiper-container">-->
+<!--  <div class="swiper-wrapper">-->
+<!--    <div class="swiper-text">-->
+<!--      <p>-->
+<!--        <h1>♪ペットコミュニティへようこそ♪</h1>-->
+<!--      </p>-->
+<!--      <p>-->
+<!--        このサイトは『ペットが主役』のコミュニティアプリです。</br>-->
+<!--        日頃の何でも無い日常や相談、ペットに関わることならすべてOKです！</br>-->
+<!--        気軽に繋がって楽しんでください（＾＾）b-->
+<!--      </p>-->
+<!--      <div class="mt-4">-->
+<!--        <%#= link_to "ログイン", new_user_session_path, class: "btn btn-primary mr-5" %>-->
+<!--        <%#= link_to "新規登録", new_user_registration_path, class: "btn btn-success mr-5" %>-->
+<!--        <%#= link_to "ゲストログイン(閲覧用)", users_guest_sign_in_path, class: "btn btn-secondary sign_in", method: :post %>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-md-8 text-center mt-5">
@@ -8,10 +29,100 @@
         気軽に繋がって楽しんでください（＾＾）b
       </p>
       <div class="mt-4">
-        <%= link_to "ログイン", new_user_session_path, class: "btn btn-primary mr-5" %>
-        <%= link_to "新規登録", new_user_registration_path, class: "btn btn-success mr-5" %>
-        <%= link_to "ゲストログイン(閲覧用)", users_guest_sign_in_path, class: "btn btn-secondary sign_in", method: :post %>
+        <%= link_to "ログイン", new_user_session_path, class: "btn btn-primary mr-5 mb-1" %>
+        <%= link_to "新規登録", new_user_registration_path, class: "btn btn-success mr-5 mb-1" %>
+        <%= link_to "ゲストログイン(閲覧用)", users_guest_sign_in_path, class: "btn btn-secondary mb-1 sign_in", method: :post %>
       </div>
     </div>
+  </div>
+<!--<div class="swiper-container">-->
+<!--  <div class="swiper-wrapper">-->
+<!--    <div class="swiper-slide">-->
+<!--      <div class="s-three-wrap">-->
+<!--        <img src="img/img-640x480.gif">-->
+<!--        <span class="s-three-text">slide 1</span>-->
+<!--        <span class="s-three-sub">sub text 1.</span>-->
+<!--        <a href="" class="s-three-button">button 1</a>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="swiper-slide">-->
+<!--      <div class="s-three-wrap">-->
+<!--        <img src="img/pexels-pixabay-45170">-->
+<!--        <span class="s-three-text">slide 2</span>-->
+<!--        <span class="s-three-sub">sub text 2.</span>-->
+<!--        <a href="" class="s-three-button">button 2</a>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="swiper-slide">-->
+<!--      <div class="s-three-wrap">-->
+<!--        <img src="img/img-640x480.gif">-->
+<!--        <span class="s-three-text">slide 3</span>-->
+<!--        <span class="s-three-sub">sub text 3.</span>-->
+<!--        <a href="" class="s-three-button">button 3</a>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+
+<!--  <div class="swiper-pagination"></div>-->
+<!--  <div class="swiper-button-prev"></div>-->
+<!--  <div class="swiper-button-next"></div>-->
+<!--</div>-->
+
+  <div class="row">
+    <div class="swiper">
+      <div class="swiper-wrapper">
+
+        <div class="swiper-slide">
+          <%= image_tag asset_path('pexels-pixabay-45170'), alt: '' %>
+        </div>
+
+        <div class="swiper-slide">
+          <%= image_tag asset_path('pexels-svetozar-milashevich-1490908'), alt: '' %>
+        </div>
+
+        <div class="swiper-slide">
+          <%= image_tag asset_path('pexels-tetyana-kovyrina-3586056'), alt: '' %>
+        </div>
+
+        <div class="swiper-slide">
+          <%= image_tag asset_path('pexels-roshan-kamath-1661179'), alt: '' %>
+        </div>
+
+        <div class="swiper-slide">
+          <%= image_tag asset_path('pexels-tim-mossholder-942295'), alt: '' %>
+        </div>
+
+        <div class="swiper-slide">
+          <%= image_tag asset_path('pexels-jimmy-chan-2078845'), alt: '' %>
+        </div>
+
+      </div>
+       ページネーション
+      <div class="swiper-pagination"></div>
+       前後の矢印
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+    </div>
+
+    <script>
+      const swiper = new Swiper(".swiper", {
+      loop: true, // ループ
+      speed: 2000, // 少しゆっくり(デフォルトは300)
+      autoplay: { // 自動再生
+        delay: 1000, // 1秒後に次のスライド
+        disableOnInteraction: false, // 矢印をクリックしても自動再生を止めない
+      },
+      // ページネーション
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+      // 前後の矢印
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+    });
+    </script>
   </div>
 </div>
