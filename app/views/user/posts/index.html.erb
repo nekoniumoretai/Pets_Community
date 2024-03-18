@@ -25,7 +25,7 @@
             <li class="list-group-item">
               <strong>ユーザーネーム：</strong>
               <%= link_to post.user.nickname, user_path(post.user) %>
-              <%= render 'user/relationships/btn', post: post %>
+              <%= render 'user/relationships/btn', user: post.user %>
             </li>
             <li class="list-group-item">
               <strong>タグ：</strong>

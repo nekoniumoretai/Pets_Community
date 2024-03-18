@@ -4,58 +4,49 @@
   <% else %>
     <h2 class="mt-5 mb-4 text-center"><%= "#{@user.nickname} さんのページ" %></h2>
   <% end %>
-  <table class="table mx-auto" style="width: 400px;">
-    <tbody>
-      <tr>
-        <th></th>
-        <td><%= image_tag @user.get_profile_image, class: "rounded-circle", size: "100x100" %></td>
-      </tr>
-      <tr>
-        <th>ニックネーム:</th>
-        <td><%= @user.nickname %></td>
-      </tr>
-      <tr>
-        <td></td>
-        <td>
-          フォロー数: <%= @user.followings.count %>
-          フォロワー数: <%= @user.followers.count %>
-        </td>
-      </tr>
-      <tr>
-        <% if @user == current_user %>
-          <th>メールアドレス:</th>
-            <td><%= @user.email %></td>
-        <% end %>
-      </tr>
-      <tr>
-        <th>自己紹介:</th>
-        <td>
-          <div id="intro-short">
-            <% if @user.introduction.present? %>
-              <%= truncate_intro = truncate(@user.introduction, length: 30, omission: '...') %>
-              <% if @user.introduction.length > 30 %>
-                <%= link_to "続きを見る", "#", id: "show-full-intro-link" %>
-              <% end %>
-            <% end %>
-          </div>
-          <div id="intro-full" style="display: none;">
-            <%= @user.introduction %>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <% if @user == current_user %>
-          <td colspan="2" class="text-center">
-            <%= link_to "マイペット", user_pets_path(@user), class:"btn btn-primary" %>
-            <%= link_to "マイ情報を編集する", edit_user_path(@user), class:"btn btn-success ml-5" %>
-          </td>
-        <% else %>
-          <td colspan="2" class="text-center">
-            <%= link_to "#{@user.nickname}さんの投稿を見る", posts_path(@user), class: "btn btn-primary" %>
-            <%= link_to "#{@user.nickname}さんのペットを見る", user_pets_path(@user), class: "btn btn-info mt-3" %>
-          </td>
-        <% end %>
-      </tr>
-    </tbody>
-  </table>
+
+  <div class="row justify-content-center">
+    <div class="col-md-6 text-center">
+      <%= image_tag @user.get_profile_image, class: "rounded-circle", size: "100x100" %>
+      <p><strong>ニックネーム:</strong> <%= @user.nickname %></p>
+      <p>フォロー数: <%= @user.followings.count %></p>
+      <p>フォロワー数: <%= @user.followers.count %></p>
+      <% if @user == current_user %>
+        <p><strong>メールアドレス:</strong> <%= @user.email %></p>
+      <% end %>
+      <p><strong>自己紹介:</strong></p>
+      <div class="readmore">
+        <input id="readmore" type="checkbox">
+        <label for="readmore"></label>
+        <div class="readmore-content">
+          <p><%= simple_format(@user.introduction, sanitize: true, class: "m-0") %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    $(document).ready(function () {
+      var lines = $(".readmore-content > p").text().split(/\r\n|\r|\n/).length;
+      if (lines <= 5) {
+        $(".readmore").css("margin", "0");
+        $(".readmore").css("padding", "0");
+        $(".readmore-content").css("height", "auto");
+        $(".readmore > label").addClass("d-none");
+        $(".readmore-content").removeClass("readmore-content");
+      }
+    })
+  </script>
+
+  <div class="row justify-content-center mt-3">
+    <div class="col-md-5 text-center">
+      <% if @user == current_user %>
+        <%= link_to "マイペット", user_pets_path(@user), class:"btn btn-primary btn-block" %>
+        <%= link_to "マイ情報を編集する", edit_user_path(@user), class:"btn btn-success btn-block mt-3 mb-3" %>
+      <% else %>
+        <%= link_to "#{@user.nickname}さんの投稿を見る", posts_path(@user), class: "btn btn-primary btn-block" %>
+        <%= link_to "#{@user.nickname}さんのペットを見る", user_pets_path(@user), class: "btn btn-info btn-block mt-3 mb-3" %>
+      <% end %>
+    </div>
+  </div>
 </div>

@@ -14,8 +14,8 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
   </head>
 
-  <body>
-    <div class="footerFixed">
+  <body class="d-flex flex-column min-vh-100">
+    <div class="flex-grow-1">
       <% if flash[:notice] %>
         <div class="alert alert-success" role="alert">
           <%= flash[:notice] %>
@@ -29,7 +29,7 @@
       <% end %>
 
       <%= render 'layouts/header' %>
-      <main>
+      <main class="my-3">
         <div class="d-flex justify-content-end mb-2 mt-2 mr-4">
           <%= render 'user/searches/form' %>
         </div>
@@ -37,9 +37,9 @@
           <%= yield %>
         </div>
       </main>
-      <footer>
-        <p>Pets_Community</p>
-      </footer>
     </div>
+    <footer class="py-3">
+      <p class="m-0 text-center logo">ペットコミュニティー</p>
+    </footer>
   </body>
 </html>
