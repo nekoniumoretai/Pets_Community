@@ -6,8 +6,6 @@
           <div class="row">
             <div class="col-6">
               <strong>ユーザーネーム：</strong>
-            </div>
-            <div class="col-6">
               <%= @post.user.nickname %>
             </div>
           </div>
@@ -24,18 +22,12 @@
           <div class="row">
             <div class="col-6">
               <strong>タイトル：</strong>
-            </div>
-            <div class="col-6">
               <%= @post.title %>
             </div>
           </div>
           <div class="row">
-            <div class="col-6">
-              <strong>本文：</strong>
-            </div>
-            <div class="col-6">
-              <%= @post.content %>
-            </div>
+            <div class="col-6"><strong>本文：</strong></div>
+            <%= @post.content %>
           </div>
           <div class="row">
             <div class="col-6">
@@ -57,20 +49,11 @@
           </div>
         </div>
       </div>
-      <!--<%# if @post.user == current_user %>-->
-      <!--  <div class="row">-->
-      <!--    <div class="col-9"></div>-->
-      <!--    <div class="col-3 text-center">-->
-      <!--      <%#= link_to "編集", edit_post_path(@post), class: "btn btn-success btn-block mt-1" %>-->
-      <!--    </div>-->
-      <!--  </div>-->
-      <!--<%# end %>-->
-      <!--<div id="favorite_btn_<%#= @post.id %>">-->
-      <!--  <%#= render 'user/favorites/favorite', post: @post %>-->
-      <!--</div>-->
-      <!--<div id="comments">-->
-      <!--  <%#= render 'user/post_comments/comment', post: @post, post_comment: @post_comment %>-->
-      <!--</div>-->
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-3">
+      <%= link_to "削除", admin_post_path(@post), method: :delete, data: { confirm:"本当に削除しますか？" }, class:"btn btn-danger btn-block mt-2" %>
     </div>
   </div>
 </div>

@@ -17,12 +17,13 @@
 ・特定の種類のペットについて話したい方。
 
 ### 主な利用シーン
+・ペットについて発信したい方</br>
 ・同じ悩みや相談をしている人がいないか調べたい時。</br>
 ・自身が飼育しているペットについて雑談や相談したい時。</br>
 ・飼っているペットが脱走してしまい、発見に至るまでの情報提供を求める時。
 
 ## 設計書
-後ほど記載予定
+  https://docs.google.com/spreadsheets/d/1Xzu9cxIUooj7NyHLAgOYUrufFO4IV5pGQv_78mK9U0E/edit#gid=0
 
 ## 開発環境
 * OS : Linux(CentOS)

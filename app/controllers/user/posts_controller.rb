@@ -1,5 +1,5 @@
 class User::PostsController < ApplicationController
-  # before_action :authenticate_user!
+  before_action :authenticate_user!
   before_action :get_post, only: [:show, :edit]
 
   def new
@@ -19,7 +19,7 @@ class User::PostsController < ApplicationController
 
   def index
     @posts =  params[:tag_id].present? ? Tag.find(params[:tag_id]).posts : Post.order(created_at: :desc)
-    @posts = @posts.page(params[:page]).per(21)
+    @posts = @posts.page(params[:page]).per(14)
   end
 
   def show

@@ -16,16 +16,24 @@
       <ul class="navbar-nav ml-auto">
         <% if admin_signed_in? %>
           <li class="nav-item">
-            <%= link_to "ユーザーの投稿を確認する", admin_posts_path, class: 'nav-link' %>
+            <%= link_to admin_posts_path, class: 'nav-link' do %>
+            <i class="fa-solid fa-book-open fa-fw mr-1"></i>ユーザーの投稿を確認する
+            <% end %>
           </li>
           <li class="nav-item">
-            <%= link_to "コメント一覧を確認する", admin_post_comments_path, class: 'nav-link' %>
+            <%= link_to admin_post_comments_path, class: 'nav-link' do %>
+            <i class="fa-regular fa-comment fa-fw mr-1"></i>コメントを確認する
+            <% end %>
           </li>
           <li class="nav-item">
-            <%= link_to "登録しているユーザーを確認する", admin_users_path, class: 'nav-link' %>
+            <%= link_to admin_users_path, class: 'nav-link' do %>
+            <i class="fa-solid fa-users fa-fw mr-1"></i>登録しているユーザーを確認する
+            <% end %>
           </li>
           <li class="nav-item">
-            <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: 'nav-link' %>
+            <%= link_to destroy_admin_session_path, method: :delete, class: 'nav-link' do %>
+            <i class="fa-solid fa-right-from-bracket fa-fw mr-1"></i>ログアウト
+            <% end %>
           </li>
         <% elsif request.fullpath.include?("/admin") %>
           <li class="nav-item">

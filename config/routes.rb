@@ -34,8 +34,8 @@ Rails.application.routes.draw do
     patch "users/information" => "users#update"
     get "/search", to: "searches#search"
     patch "notification/:id", to: "notifications#update", as: "notification"
-    
-    
+
+
     resources :posts do
       resources :post_comments, only: [:create, :destroy]
       resource :favorites, only: [:create, :destroy]
@@ -62,7 +62,7 @@ Rails.application.routes.draw do
   # 管理者
   namespace :admin do
       get "/" => 'homes#top'
-      resources :posts, only: [:index, :show]
+      resources :posts, only: [:index, :show, :destroy]
       resources :users, only: [:index, :show, :edit, :update]
       resources :post_comments, only: [:index, :destroy]
   end
