@@ -17,13 +17,13 @@
   <body class="d-flex flex-column min-vh-100">
     <div class="flex-grow-1">
       <% if flash[:notice] %>
-        <div class="alert alert-success" role="alert">
+        <div class="alert alert-success" role="alert" style="margin: 0;">
           <%= flash[:notice] %>
         </div>
       <% end %>
 
       <% if flash[:alert] %>
-        <div class="alert alert-danger" role="alert">
+        <div class="alert alert-danger" role="alert" style="margin: 0;">
           <%= flash[:alert] %>
         </div>
       <% end %>
