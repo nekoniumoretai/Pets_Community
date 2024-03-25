@@ -7,7 +7,7 @@
           <% if @group.group_image.attached? %>
             <%= image_tag @group.group_image, size: "50x50", class: "img-thumbnail float-left mr-3" %>
           <% else %>
-            <%= image_tag 'no_image', size: "50x50", class: "img-thumbnail float-left mr-3" %>
+            <%= image_tag 'no_image.jpg', size: "50x50", class: "img-thumbnail float-left mr-3" %>
           <% end %>
           <h5 class="card-title"><%= @group.name %></h5>
           <p class="card-text"><%= @group.introduction %></p>
