@@ -9,16 +9,16 @@
               <%= @post.user.nickname %>
             </div>
           </div>
-          <% if @post.images.attached? %>
-            <div class="row">
-              <div class="col-6">
-                <strong>投稿した画像：</strong>
-              </div>
-              <div class="col-6 text-center">
-                <%= image_tag @post.images.variant(resize: "100x100") %>
-              </div>
-            </div>
-          <% end %>
+          <!--<#% if @post.images.attached? %>-->
+          <!--  <div class="row">-->
+          <!--    <div class="col-6">-->
+          <!--      <strong>投稿した画像：</strong>-->
+          <!--    </div>-->
+          <!--    <div class="col-6 text-center">-->
+          <!--      <#%= image_tag @post.images.variant(resize: "200x200") %>-->
+          <!--    </div>-->
+          <!--  </div>-->
+          <!--<#% end %>-->
           <div class="row">
             <div class="col-6">
               <strong>タイトル：</strong>
@@ -56,6 +56,13 @@
           <div class="col-9"></div>
           <div class="col-3 text-center">
             <%= link_to "編集", edit_post_path(@post), class: "btn btn-success btn-block mt-1" %>
+          </div>
+        </div>
+      <% else %>
+        <div class="row">
+          <div class="col-9"></div>
+          <div class="col-3 text-center">
+            <%= link_to "投稿一覧に戻る", posts_path %>
           </div>
         </div>
       <% end %>

@@ -1,6 +1,7 @@
 class User::PetsController < ApplicationController
   before_action :authenticate_user!
-  before_action :get_pets, only: [:show, :edit, :update, :destroy]
+  before_action :get_pet, only: [:show, :edit, :update, :destroy]
+  before_action :get_user, only: [:index, :show]
 
   def new
     @pet = Pet.new
@@ -14,14 +15,12 @@ class User::PetsController < ApplicationController
     if @pet.save
       redirect_to user_pets_path(current_user), notice: "登録しました"
     else
-      # @pets = Pet.all
       flash.now[:alert] = "必須項目を入力してください"
       render 'new'
     end
   end
 
   def index
-    @user = User.find(params[:user_id])
     @pets = @user.pets.order(created_at: :desc)
   end
 
@@ -47,8 +46,12 @@ class User::PetsController < ApplicationController
 
   private
 
-  def get_pets
+  def get_pet
     @pet = Pet.find(params[:id])
+  end
+
+  def get_user
+    @user = User.find(params[:user_id])
   end
 
   def pet_params

@@ -16,7 +16,7 @@ class User < ApplicationRecord
   has_many :group_users, dependent: :destroy
   has_many :notifications, dependent: :destroy
 
-  validates :nickname, presence: true
+  validates :nickname, presence: true, length: { maximum: 15 }
   validates :email, presence: true
 
   # ゲストユーザー用メソッド

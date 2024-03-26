@@ -1,17 +1,17 @@
-<% if users.exists? %>
-  <% users.each do |user| %>
-    <div class="row mb-3">
-      <div class="col-md-4">
-        <strong>Name:</strong> <%= user.nickname %>
-      </div>
-      <div class="col-md-4">
-        <strong>フォロー数:</strong> <%= user.followings.count %>
-      </div>
-      <div class="col-md-4">
-        <strong>フォロワー数:</strong> <%= user.followers.count %>
-      </div>
-    </div>
-  <% end %>
-<% else %>
-  <p>ユーザーはいません</p>
-<% end %>
+<!--<#% if users.exists? %>-->
+<!--  <#% users.each do |user| %>-->
+<!--    <div class="row mb-3">-->
+<!--      <div class="col-md-4">-->
+<!--        <strong>Name:</strong> <#%= user.nickname %>-->
+<!--      </div>-->
+<!--      <div class="col-md-4">-->
+<!--        <strong>フォロー数:</strong> <3%= user.followings.count %>-->
+<!--      </div>-->
+<!--      <div class="col-md-4">-->
+<!--        <strong>フォロワー数:</strong> <3%= user.followers.count %>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  <#% end %>-->
+<!--<%# else %>-->
+<!--  <p>ユーザーはいません</p>-->
+<!--<%# end %>-->

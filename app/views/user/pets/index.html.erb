@@ -32,5 +32,9 @@
     <div class="text-center">
       <%= link_to "ペットを登録する", new_user_pet_path, class: "btn btn-primary" %>
     </div>
+  <% else %>
+    <div class="text-center">
+      <%= link_to "#{@user.nickname}さんのページに戻る", user_path(@user), class: "btn btn-primary" %>
+    </div>
   <% end %>
 </div>

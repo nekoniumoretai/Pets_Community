@@ -30,7 +30,8 @@ class Post < ApplicationRecord
       Post.where('title LIKE ?', '%' + content + '%')
     end
   end
-
+  
+  #通知機能のメソッド
   after_create do
     records = user.followers.map do |follower|
       notifications.new(user_id: follower.id)

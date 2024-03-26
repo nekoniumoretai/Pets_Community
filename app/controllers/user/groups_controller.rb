@@ -18,7 +18,7 @@ class User::GroupsController < ApplicationController
   end
 
   def index
-    @groups = Group.all
+    @groups = Group.page(params[:page]).per(12).order(created_at: :desc)
     # @user = User.find(current_user.id)
   end
 

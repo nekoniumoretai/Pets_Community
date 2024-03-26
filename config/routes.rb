@@ -48,6 +48,7 @@ Rails.application.routes.draw do
     end
 
     resources :users, only: [:show, :edit, :update] do
+      resources :posts, only: [:index]
       resources :pets
       resource :relationships, only: [:create, :destroy]
       get "followings" =>"relationships#followings", as: "followings"

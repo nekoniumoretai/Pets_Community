@@ -1,16 +1,33 @@
-@use '~bootstrap/scss/bootstrap';
+// bootstrapのボタン色指定
+$theme-colors: (
+  "success": #68FF8F,
+  "info": #807971,
+  "primary": #7CD2FF,
+  "secondary": #8C9FAA,
+  "warning": #FF756A,
+  "danger": #FF7D86
+);
+
+// 枠の角だす
+$enable-rounded: false;
+
+@import '~bootstrap/scss/bootstrap';
 @import url('https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&family=Zen+Maru+Gothic&display=swap');
 
+// フォント、文字の縦間隔、背景色指定
 html, body {
   font-family: "Zen Maru Gothic", cursive !important;
   line-height: 2;
+  // グラデーションにしている
+  background: linear-gradient(45deg, rgb(172, 255, 246), rgb(171, 211, 255));
 }
 
+// ロゴのフォント指定
 .logo {
   font-family: "Cherry Bomb One", system-ui !important;
 }
 
-
+// topページのスライダー指定
 .swiper-slide img {
   max-width: 100%; /* 画像が親要素に収まるようにする */
   max-height: 100%; /* 画像が親要素に収まるようにする */

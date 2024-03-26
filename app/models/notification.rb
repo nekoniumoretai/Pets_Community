@@ -23,6 +23,8 @@ class Notification < ApplicationRecord
       post_path(notifiable.post_id)
     elsif self.notifiable_type === "Relationship"
       user_path(notifiable.follower_id)
+    elsif self.notifiable_type === "Favorite"
+      post_path(notifiable.post_id)
     else
       root_path
     end

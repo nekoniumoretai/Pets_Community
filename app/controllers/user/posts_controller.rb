@@ -18,11 +18,24 @@ class User::PostsController < ApplicationController
   end
 
   def index
-    @posts =  params[:tag_id].present? ? Tag.find(params[:tag_id]).posts : Post.order(created_at: :desc)
+    # @posts =  params[:tag_id].present? ? Tag.find(params[:tag_id]).posts : Post.where(user_id: params[:user_id]).order(created_at: :desc)
+
+    if params[:tag_id].present?
+      @posts = Tag.find(params[:tag_id]).posts
+    else
+      if params[:user_id]
+        @user = User.find(params[:user_id])
+        @posts = Post.where(user_id: params[:user_id]).order(created_at: :desc)
+      else
+        @posts = Post.order(created_at: :desc)
+      end
+    end
+
     @posts = @posts.page(params[:page]).per(14)
   end
 
   def show
+    # @user = User.find(params[:user_id])
     @post_comment = PostComment.new
   end
 

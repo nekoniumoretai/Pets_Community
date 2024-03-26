@@ -1,3 +1,64 @@
 // Place all the styles related to the user/pets controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+//ペット詳細画面の紹介文 
+.readmore {
+  position: relative;
+  margin: 50px auto 0;
+  padding: 0 0 75px;
+}
+
+.readmore label {
+  position: absolute;
+  display: table;
+  left: 50%;
+  bottom: 0;
+  margin: 0 auto;
+  width: 200px;
+  padding: 10px 0;
+  color: #fff;
+  text-align: center;
+  border-radius: 5px;
+  background-color: #333;
+  transform: translateX(-50%);
+  cursor: pointer;
+  z-index: 1;
+}
+
+.readmore label::before{
+  content: '続きを見る';
+}
+
+.readmore input[type="checkbox"]:checked ~ label::before {
+  content: '元に戻す';
+}
+
+.readmore input[type="checkbox"]{
+  display: none;
+}
+
+.readmore-content {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+}
+
+.readmore input[type="checkbox"]:checked ~ .readmore-content {
+  height: auto;
+}
+
+.readmore-content::before {
+  position: absolute;
+  display: block;
+  content: "";
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 75px;
+  background: linear-gradient( rgba(255,255,255,0) 0%, rgba(255,255,255,0.8) 50%, #fff 100%);
+}
+
+.readmore input[type="checkbox"]:checked ~ .readmore-content::before {
+  display: none;
+}

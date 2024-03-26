@@ -1,10 +1,5 @@
 
 <div class="container">
-  <div class="row">
-    <div style="text-align: right;">
-      <%= link_to "ペット一覧へ", user_pets_path %>
-    </div>
-  </div>
   <h1 class="mt-4 mb-4 text-center">ペットの情報</h1>
   <div class="row">
     <div class="col-md-6 offset-md-3">
@@ -23,20 +18,37 @@
             <input id="readmore" type="checkbox">
             <label for="readmore"></label>
             <div class="readmore-content">
-              <p class="card-text">紹介文: <%= @pet.introduction %></p>
+              <p class="card-text">紹介文: <%= simple_format(@pet.introduction, sanitize: true, class: "m-0") %></p>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+
+  <script>
+    $(document).ready(function () {
+      var lines = $(".readmore-content > p").text().split(/\r\n|\r|\n/).length;
+      if (lines <= 5) {
+        $(".readmore").css("margin", "0");
+        $(".readmore").css("padding", "0");
+        $(".readmore-content").css("height", "auto");
+        $(".readmore > label").addClass("d-none");
+        $(".readmore-content").removeClass("readmore-content");
+      }
+    })
+  </script>
+
   <div class="row justify-content-center">
     <div class="col-md-3">
       <% if @pet.user == current_user %>
         <div class="text-center">
           <%= link_to "編集", edit_user_pet_path(@pet), class:"btn btn-success btn-block mt-2" %>
           <%= link_to "削除", user_pet_path(@pet), method: :delete, data: { confirm:"削除しますか？" }, class:"btn btn-danger btn-block mt-2 mb-3" %>
+          <%= link_to "ペット一覧に戻る", user_pets_path(current_user) %>
         </div>
+      <% else %>
+        <%= link_to "ペット一覧に戻る", user_pets_path(@user), class:"btn btn-info btn-block mt-2" %>
       <% end %>
     </div>
   </div>

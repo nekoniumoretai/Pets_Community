@@ -11,6 +11,8 @@ class User::UsersController < ApplicationController
     @get_user = @user.posts.page(params[:page])
     @user_data = @user.my_page_data
     @user_posts = @user.posts.order(created_at: :desc).page(params[:page]).per(20)
+    @posts = @user.posts
+    # @post_user = User.find(params[:id])
   end
 
   def edit

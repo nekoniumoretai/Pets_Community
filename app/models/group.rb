@@ -4,7 +4,7 @@ class Group < ApplicationRecord
   has_many :users, through: :group_users, source: :user
   # has_many :group_message, dependent: :destroy
 
-  validates :name, presence: true
+  validates :name, presence: true, length: {maximum: 30}
   validates :introduction, presence: true
   has_one_attached :group_image
 
