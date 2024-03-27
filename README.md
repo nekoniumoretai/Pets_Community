@@ -38,4 +38,4 @@
 
 ## 使用素材
 * フリーイラスト素材とし以下を使用
-* 使用確認後記載予定
+* pexels(https://www.pexels.com/ja-jp/)
