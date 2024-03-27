@@ -1,18 +1,18 @@
 <div class="container">
-  <h2 class="text-center mt-4 mb-3">いいねした投稿一覧</h2>
-  <div class="row justify-content-center">
-    <div class="col-md-8">
-      <% if @favorite_posts.any? %>
-        <ul class="list-group">
-          <% @favorite_posts.each do |post| %>
-            <li class="list-group-item">
-              <%= link_to post.title, post_path(post) %>
-            </li>
-          <% end %>
-        </ul>
-      <% else %>
-        <p class="text-center">いいねした投稿はありません</p>
-      <% end %>
+  <h2>いいねした投稿一覧</h2>
+  <p>（投稿タイトルをクリックして詳細が確認できます）</p>
+    <% if @favorite_posts.any? %>
+      <ul>
+        <% @favorite_posts.each do |post| %>
+          <li>
+            <%= link_to post.title, post_path(post), class: "favorite-link" %>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p>いいねした投稿はありません</p>
+    <% end %>
     </div>
   </div>
 </div>
+

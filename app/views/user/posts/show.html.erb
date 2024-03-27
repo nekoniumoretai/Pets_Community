@@ -9,16 +9,6 @@
               <%= @post.user.nickname %>
             </div>
           </div>
-          <!--<#% if @post.images.attached? %>-->
-          <!--  <div class="row">-->
-          <!--    <div class="col-6">-->
-          <!--      <strong>投稿した画像：</strong>-->
-          <!--    </div>-->
-          <!--    <div class="col-6 text-center">-->
-          <!--      <#%= image_tag @post.images.variant(resize: "200x200") %>-->
-          <!--    </div>-->
-          <!--  </div>-->
-          <!--<#% end %>-->
           <div class="row">
             <div class="col-6">
               <strong>タイトル：</strong>
@@ -38,7 +28,7 @@
           <div class="row">
             <div class="col-6">
               <strong>投稿日：</strong>
-              <%= @post.created_at.strftime('%Y/%m/%d') %>
+              <%= @post.created_at.in_time_zone('Asia/Tokyo').strftime('%Y年%m月%d日 %H:%M')%>
             </div>
           </div>
           <div class="row">
@@ -62,7 +52,7 @@
         <div class="row">
           <div class="col-9"></div>
           <div class="col-3 text-center">
-            <%= link_to "投稿一覧に戻る", posts_path %>
+            <%= link_to "投稿一覧に戻る", posts_path, class: "btn btn-primary btn-block mt-1" %>
           </div>
         </div>
       <% end %>
