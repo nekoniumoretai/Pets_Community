@@ -64,7 +64,9 @@ Rails.application.routes.draw do
   namespace :admin do
       get "/" => 'homes#top'
       resources :posts, only: [:index, :show, :destroy]
-      resources :users, only: [:index, :show, :edit, :update]
+      resources :users, only: [:index, :show, :edit, :update] do
+        resources :posts, only: [:index]
+      end
       resources :post_comments, only: [:index, :destroy]
   end
 end

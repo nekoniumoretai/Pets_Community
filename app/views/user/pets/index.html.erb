@@ -31,10 +31,11 @@
   <% if @user == current_user %>
     <div class="text-center">
       <%= link_to "ペットを登録する", new_user_pet_path, class: "btn btn-primary" %>
+      <%= link_to "マイページに戻る", user_path(current_user), class: "btn btn-secondary ml-2" %>
     </div>
   <% else %>
     <div class="text-center">
-      <%= link_to "#{@user.nickname}さんのページに戻る", user_path(@user), class: "btn btn-primary" %>
+      <%= link_to "#{@user.nickname}さんのページに戻る", user_path(@user), class: "btn btn-secondary" %>
     </div>
   <% end %>
 </div>

@@ -1,48 +1,57 @@
 <div class="container">
   <h1 class="mt-4 mb-4">ペット登録画面</h1>
   <%= form_with model: @pet, url: user_pets_path, class: "mt-4" do |f| %>
-    <table class="table">
-      <tbody>
-        <tr>
-          <th><%= f.label :image, "ペットの画像" %></th>
-          <td><%= f.file_field :image, accept: "image/*" %></td>
-        </tr>
-        <tr>
-          <th><%= f.label :name, "ペットの名前 (*必須)" %></th>
-          <td><%= f.text_field :name, class: "form-control", placeholder: "ペットの名前" %></td>
-        </tr>
-        <tr>
-          <th><%= f.label :gender, "性別 (*必須)" %></th>
-          <td><%= f.select :gender, ["オス", "メス", "不明"], prompt: "性別を選択", class: "form-control" %></td>
-        </tr>
-        <tr>
-          <th><%= f.label :birthday, "ペットの誕生日" %></th>
-          <td>
-            <div class="row">
-              <div class="col-md-4">
-                <%= f.select :birthday_year, (Date.today.year - 100..Date.today.year).to_a.reverse, { prompt: "年" }, class: "form-control" %>
-              </div>
-              <div class="col-md-4">
-                <%= f.select :birthday_month, 1..12, { prompt: "月" }, class: "form-control" %>
-              </div>
-              <div class="col-md-4">
-                <%= f.select :birthday_day, 1..31, { prompt: "日" }, class: "form-control" %>
-              </div>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <th><%= f.label :kind, "品種 (*必須)" %></th>
-          <td><%= f.text_field :kind, class: "form-control", placeholder: "品種" %></td>
-        </tr>
-        <tr>
-          <th><%= f.label :introduction, "ペットの紹介文" %></th>
-          <td><%= f.text_area :introduction, class: "form-control", rows: 5, placeholder: "紹介文" %></td>
-        </tr>
-        <tr>
-          <td colspan="2" class="text-center"><%= f.submit "登録する", class: "btn btn-primary" %></td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="form-group row">
+      <%= f.label :image, "ペットの画像", class: "col-sm-2 col-form-label" %>
+      <div class="col-sm-10">
+        <%= f.file_field :image, accept: "image/*", class: "form-control-file" %>
+      </div>
+    </div>
+    <div class="form-group row">
+      <%= f.label :name, "ペットの名前 (*必須)", class: "col-sm-2 col-form-label" %>
+      <div class="col-sm-10">
+        <%= f.text_field :name, class: "form-control", placeholder: "ペットの名前" %>
+      </div>
+    </div>
+    <div class="form-group row">
+      <%= f.label :gender, "性別 (*必須)", class: "col-sm-2 col-form-label" %>
+      <div class="col-sm-10">
+        <%= f.select :gender, ["オス", "メス", "不明"], prompt: "性別を選択", class: "form-control" %>
+      </div>
+    </div>
+    <div class="form-group row">
+      <%= f.label :birthday, "ペットの誕生日", class: "col-sm-2 col-form-label" %>
+      <div class="col-sm-10">
+        <div class="row">
+          <div class="col-sm-4">
+            <%= f.select :birthday_year, (Date.today.year - 100..Date.today.year).to_a.reverse, { prompt: "年" }, class: "form-control" %>
+          </div>
+          <div class="col-sm-4">
+            <%= f.select :birthday_month, 1..12, { prompt: "月" }, class: "form-control" %>
+          </div>
+          <div class="col-sm-4">
+            <%= f.select :birthday_day, 1..31, { prompt: "日" }, class: "form-control" %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <%= f.label :kind, "品種 (*必須)", class: "col-sm-2 col-form-label" %>
+      <div class="col-sm-10">
+        <%= f.text_field :kind, class: "form-control", placeholder: "品種" %>
+      </div>
+    </div>
+    <div class="form-group row">
+      <%= f.label :introduction, "ペットの紹介文", class: "col-sm-2 col-form-label" %>
+      <div class="col-sm-10">
+        <%= f.text_area :introduction, class: "form-control", rows: 5, placeholder: "紹介文" %>
+      </div>
+    </div>
+    <div class="form-group row justify-content-center">
+      <div class="col-2">
+        <%= f.submit "登録する", class: "btn  btn-primary btn-block" %>
+        <%= link_to "戻る", user_pets_path(current_user), class: "btn btn-secondary btn-block mt-2" %>
+      </div>
+    </div>
   <% end %>
 </div>

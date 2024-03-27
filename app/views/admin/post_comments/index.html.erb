@@ -22,4 +22,8 @@
   <% else %>
     <p>コメントはありません</p>
   <% end %>
+  <div class="row justify-content-center">
+    <%= paginate @post_comments %>
+  </div>
 </div>
+

@@ -18,8 +18,6 @@ class User::PostsController < ApplicationController
   end
 
   def index
-    # @posts =  params[:tag_id].present? ? Tag.find(params[:tag_id]).posts : Post.where(user_id: params[:user_id]).order(created_at: :desc)
-
     if params[:tag_id].present?
       @posts = Tag.find(params[:tag_id]).posts
     else
@@ -35,7 +33,6 @@ class User::PostsController < ApplicationController
   end
 
   def show
-    # @user = User.find(params[:user_id])
     @post_comment = PostComment.new
   end
 

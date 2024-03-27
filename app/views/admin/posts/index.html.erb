@@ -1,4 +1,5 @@
-<h1 class="text-center">投稿一覧（全ユーザー）</h1>
+<!--取得した情報によって投稿一覧のタイトルを変える-->
+<h1 class="mb-4 text-center"><%= params[:user_id] ? "#{@user.nickname}さんの投稿" : "すべての投稿" %></h1>
 <div class="row">
   <% @posts.each do |post| %>
     <div class="col-md-4 mb-4">
@@ -17,4 +18,7 @@
       </div>
     </div>
   <% end %>
+  <div class="row justify-content-center">
+    <%= paginate @posts %>
+  </div>
 </div>

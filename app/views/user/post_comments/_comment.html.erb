@@ -16,7 +16,7 @@
       </span>
       <% if post_comment.user == current_user %>
         <span>
-          <%= link_to "削除", post_post_comment_path(post_comment.post, post_comment), method: :delete, remote: true %>
+          <%= link_to "削除する", post_post_comment_path(post_comment.post, post_comment), method: :delete, remote: true, class: "comment-link" %>
         </span>
       <% end %>
     </div>

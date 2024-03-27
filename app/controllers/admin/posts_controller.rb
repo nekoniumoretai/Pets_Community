@@ -3,8 +3,13 @@ class Admin::PostsController < ApplicationController
   before_action :get_post, only: [:show, :destroy]
 
   def index
-    @posts =  params[:tag_id].present? ? Tag.find(params[:tag_id]).posts : Post.order(created_at: :desc)
-    @posts = @posts.page(params[:page]).per(14)
+    if params[:user_id]
+      @user = User.find(params[:user_id])
+      @posts = Post.where(user_id: params[:user_id]).order(created_at: :desc)
+    else
+      @posts = Post.order(created_at: :desc)
+    end
+    @posts = @posts.page(params[:page]).per(25)
   end
 
   def show ; end
