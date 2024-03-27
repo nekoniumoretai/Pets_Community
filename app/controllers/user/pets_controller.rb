@@ -1,7 +1,6 @@
 class User::PetsController < ApplicationController
   before_action :authenticate_user!
   before_action :get_pet, only: [:show, :edit, :update, :destroy]
-  before_action :get_user, only: [:index, :show]
 
   def new
     @pet = Pet.new
@@ -21,10 +20,13 @@ class User::PetsController < ApplicationController
   end
 
   def index
+    @user = User.find(params[:user_id])
     @pets = @user.pets.order(created_at: :desc)
   end
 
-  def show; end
+  def show
+    @user = User.find(params[:user_id])
+  end
 
   def edit; end
 
@@ -48,10 +50,6 @@ class User::PetsController < ApplicationController
 
   def get_pet
     @pet = Pet.find(params[:id])
-  end
-
-  def get_user
-    @user = User.find(params[:user_id])
   end
 
   def pet_params
