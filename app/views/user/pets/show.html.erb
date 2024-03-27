@@ -43,7 +43,7 @@
     <div class="col-md-3">
       <% if @pet.user == current_user %>
         <div class="text-center">
-          <%= link_to "編集", edit_user_pet_path(@pet), class:"btn btn-success btn-block mt-2" %>
+          <%= link_to "編集", edit_user_pet_path(current_user), class:"btn btn-success btn-block mt-2" %>
           <%= link_to "削除", user_pet_path(@pet), method: :delete, data: { confirm:"削除しますか？" }, class:"btn btn-danger btn-block mt-2" %>
           <%= link_to "ペット一覧に戻る", user_pets_path(current_user), class:"btn btn-secondary btn-block mt-2 mb-3" %>
         </div>

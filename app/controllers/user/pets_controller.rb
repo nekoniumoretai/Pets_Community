@@ -1,6 +1,7 @@
 class User::PetsController < ApplicationController
   before_action :authenticate_user!
   before_action :get_pet, only: [:show, :edit, :update, :destroy]
+  before_action :get_user, only: [:index, :show]
 
   def new
     @pet = Pet.new
@@ -20,12 +21,12 @@ class User::PetsController < ApplicationController
   end
 
   def index
-    @user = User.find(params[:user_id])
+
     @pets = @user.pets.order(created_at: :desc)
   end
 
   def show
-    @user = User.find(params[:user_id])
+
   end
 
   def edit; end
@@ -34,7 +35,7 @@ class User::PetsController < ApplicationController
     birthday = "#{params[:pet][:birthday_year]}-#{params[:pet][:birthday_month]}-#{params[:pet][:birthday_day]}"
     params[:pet][:birthday] = birthday
     if @pet.update(pet_params)
-      redirect_to user_pet_path(@pet.id), notice: "登録内容を変更しました"
+      redirect_to user_pet_path(current_user), notice: "登録内容を変更しました"
     else
       flash.now[:alert] = "必須項目を入力してください"
       render 'edit'
@@ -51,6 +52,9 @@ class User::PetsController < ApplicationController
   def get_pet
     @pet = Pet.find(params[:id])
   end
+
+  def get_user
+    @user = User.find(params[:user_id])
 
   def pet_params
     params.require(:pet).permit(:name, :gender, :birthday, :kind, :introduction, :image)
