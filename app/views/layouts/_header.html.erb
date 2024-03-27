@@ -1,10 +1,10 @@
 <header>
   <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #BBFFFF;">
     <% if admin_signed_in? %>
-      <a class="navbar-brand" href="#">ペットコミュニティ</a>
+      <a class="navbar-brand" href="#">ペットコミュニティ~</a>
     <% else %>
       <%= link_to root_path, class: "navbar-brand logo" do %>
-        ペットコミュニティ
+        ペットコミュニティ~
       <% end %>
     <% end %>
 
@@ -12,6 +12,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
+<!--以下管理者用ヘッダー記述-->
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto">
         <% if admin_signed_in? %>
@@ -39,6 +40,7 @@
           <li class="nav-item">
             <%= link_to "新規登録", new_admin_registration_path, class: 'nav-link' %>
           </li>
+<!--以下ユーザー用ヘッダー記述-->
         <% elsif user_signed_in? %>
           <li class="nav-item">
             <%= link_to user_path(current_user), class: 'nav-link' do %>
@@ -69,8 +71,10 @@
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <%= link_to "投稿する", new_post_path, class: 'dropdown-item' %>
-              <%= link_to "みんなの投稿一覧を見る", posts_path, class: 'dropdown-item' %>
+              <%= link_to "自分の投稿を見る", user_posts_path(current_user), class: 'dropdown-item' %>
+              <%= link_to "みんなの投稿を見る", posts_path, class: 'dropdown-item' %>
               <%= link_to "いいねした投稿を見る", favorites_user_path(current_user), class: 'dropdown-item' %>
+
            </div>
           </li>
 
@@ -97,7 +101,7 @@
           <li class="nav-item">
             <%= link_to new_user_registration_path, class: 'nav-link' do %>
             <i class="fa-solid fa-user-plus"></i>
-            新規投稿
+            新規登録
             <% end %>
           </li>
           <li class="nav-item">

@@ -62,3 +62,8 @@
 .readmore input[type="checkbox"]:checked ~ .readmore-content::before {
   display: none;
 }
+
+// 参加中グループ画面の文字色
+.group-link{
+  color: #191970;
+}

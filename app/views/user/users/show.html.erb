@@ -43,7 +43,6 @@
       <% if @user == current_user %>
         <%= link_to "マイペット", user_pets_path(@user), class:"btn btn-primary btn-block" %>
         <%= link_to "マイ情報を編集する", edit_user_path(@user), class:"btn btn-success btn-block mt-3 mb-3" %>
-        <%#= link_to "自分の投稿を見る", user_post_path(@user) %>
       <% else %>
         <%= link_to "#{@user.nickname}さんの投稿を見る", user_posts_path(@user), class: "btn btn-primary btn-block" %>
         <%= link_to "#{@user.nickname}さんのペットを見る", user_pets_path(@user), class: "btn btn-info btn-block mt-3 mb-3" %>
