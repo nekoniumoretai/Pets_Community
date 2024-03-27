@@ -2,9 +2,6 @@
 
 <div class="container">
   <h1 class="mb-4">検索結果</h1>
-  <%= form_tag posts_path, method: :get, class: 'boards__searchForm' do %>
-    <%= select_tag :tag_id, options_from_collection_for_select(Tag.all, :id, :name, params[:tag_id]), { prompt: 'タグで絞り込み検索', onchange: 'submit(this.form);'} %>
-  <% end %>
     <div class="row">
       <% posts.each do |post| %>
         <div class="col-md-4 mb-4">
