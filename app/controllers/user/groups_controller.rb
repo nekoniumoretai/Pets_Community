@@ -19,12 +19,10 @@ class User::GroupsController < ApplicationController
 
   def index
     @groups = Group.page(params[:page]).per(12).order(created_at: :desc)
-    # @user = User.find(current_user.id)
   end
 
   def show
     @group = Group.find(params[:id])
-    # @user = User.find(params[:id])
   end
 
   def edit;end

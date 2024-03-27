@@ -1,5 +1,5 @@
 <div class="container">
-  <h1><%= @group.name %>の部屋</h1>
+  <h1><%= @group.name %>のチャットルーム</h1>
 
   <%= form_with model: @message, url: group_group_messages_path, method: :post do |f| %>
     <div class="form-group">

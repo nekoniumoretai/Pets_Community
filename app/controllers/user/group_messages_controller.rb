@@ -1,4 +1,6 @@
 class User::GroupMessagesController < ApplicationController
+  before_action :authenticate_user!
+  
   def new
     @group = Group.find(params[:group_id])
 
