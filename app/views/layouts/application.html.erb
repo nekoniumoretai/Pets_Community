@@ -32,6 +32,9 @@
       <main class="my-3">
         <div class="d-flex justify-content-end mb-2 mt-2 mr-4">
           <%= render 'user/searches/form' %>
+        <% if admin_signed_in? %>
+          <%= render 'admin/searches/form' %>
+        <% end %>
         </div>
         <div>
           <%= yield %>

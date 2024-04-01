@@ -63,6 +63,7 @@ Rails.application.routes.draw do
   # 管理者
   namespace :admin do
       get "/" => 'homes#top'
+      get "/search", to: "searches#search"
       resources :posts, only: [:index, :show, :destroy]
       resources :users, only: [:index, :show, :edit, :update] do
         resources :posts, only: [:index]
