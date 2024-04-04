@@ -1,16 +1,16 @@
 <div class="container">
-
   <div class="row justify-content-center">
     <div class="col-md-8 text-center mt-5">
       <h1>Welcome, Admin!</h1>
       <p>ここは管理者用のページです</p>
-
       <div class="mt-5">
         <% if admin_signed_in? %>
           <%= link_to "ユーザーの投稿一覧を見る", admin_posts_path, class: "btn btn-primary mr-3 mt-5" %>
           <%= link_to "登録しているユーザー一覧を見る", admin_users_path, class: "btn btn-primary mt-5" %>
         <% else %>
-          <%= link_to "ログイン", new_admin_session_path, class: "btn btn-primary mr-3 mt-5" %>
+          <%= link_to new_admin_session_path, class: "btn btn-primary mr-3 mt-5" do %>
+            <i class="fa-solid fa-right-to-bracket fa-fw mr-1"></i>ログイン
+          <% end %>
         <% end %>
       </div>
     </div>

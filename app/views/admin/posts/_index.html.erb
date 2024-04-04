@@ -1,0 +1,42 @@
+<!--投稿検索用ファイル-->
+
+<div class="container">
+  <h1 class="mb-4">検索結果</h1>
+    <div class="row">
+      <% posts.each do |post| %>
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            <% if post.images.attached? %>
+              <div class="card-img-top">
+                <% post.images.each do |image| %>
+                  <%= image_tag image, class: "card-img-top", alt: "投稿画像" %>
+                <% end %>
+              </div>
+            <% end %>
+            <div class="card-body">
+              <h5 class="card-title"><%= link_to post.title, post_path(post) %></h5>
+              <!--投稿内容を50文字まで表示させる-->
+              <p class="card-text"><%= strip_tags(post.content.to_s).truncate(50) %></p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <strong>ユーザーネーム：</strong>
+                <%= link_to post.user.nickname, user_path(post.user) %>
+              </li>
+              <li class="list-group-item">
+                <strong>タグ：</strong>
+                <% post.tags.each do |tag| %>
+                  <span class="badge badge-secondary"><%= tag.name %></span>
+                <% end %>
+              </li>
+              <li class="list-group-item">
+                <p>
+                  <%= link_to "#{post.post_comments.count}コメント", post_path(post.id), class: "btn btn-sm btn-outline-secondary mr-3" %>
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      <% end %>
+  </div>
+</div>

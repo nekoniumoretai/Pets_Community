@@ -15,6 +15,9 @@ class User < ApplicationRecord
   has_many :followers, through: :reverse_of_relationships, source: :follower
   has_many :group_users, dependent: :destroy
   has_many :notifications, dependent: :destroy
+  has_many :reporter, class_name: "Report", foreign_key: "reporter_id", dependent: :destroy
+  has_many :reported, class_name: "Report", foreign_key: "reported_id", dependent: :destroy
+
 
   validates :nickname, presence: true, length: { maximum: 15 }
   validates :email, presence: true

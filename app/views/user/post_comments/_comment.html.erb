@@ -19,6 +19,9 @@
           <%= link_to "削除する", post_post_comment_path(post_comment.post, post_comment), method: :delete, remote: true, class: "comment-link" %>
         </span>
       <% end %>
+      <div class="report-btn text-right ml-2" id="report-btn-<%= post_comment.id %>">
+      　<%= render "user/reports/report_btn", comment: comment %>
+      </div>
     </div>
   <% end %>
 </div>
