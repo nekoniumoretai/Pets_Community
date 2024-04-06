@@ -29,7 +29,7 @@ class User::GroupsController < ApplicationController
 
   def update
     if @group.update(group_params)
-      redirect_to groups_path(@group), notice: "コミュニティを編集しました"
+      redirect_to group_path(@group), notice: "コミュニティを編集しました"
     else
       flash.now[:alert] = "グループ名、グループ紹介文を入力してください"
       render 'edit'

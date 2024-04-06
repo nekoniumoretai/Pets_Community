@@ -1,4 +1,4 @@
-<%= simple_form_for report, remote: true do |f| %>
+<%= form_with model: report, local: false do |f| %>
   <div class="form-check">
     <%= f.radio_button :reason, "malicious_expression" %>
     <%= f.label :reason_malicious_expression, I18n.t("enums.report.reason.malicious_expression"), class: "form-check-label" %>
