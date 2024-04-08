@@ -5,10 +5,15 @@ class Admin::SearchesController < ApplicationController
     @model = params[:model]
     @content = params[:content]
     @method = params[:method]
-    if @model == "user"
-      @records = User.search_for(@content, @method)
-    else
-      @records = Post.search_for(@content, @method)
+
+    case @model
+      when 'user'
+        @records = User.search_for(@content, @method)
+      when 'post'
+        @records = Post.search_for(@content, @method)
+      when 'post_comment'
+        @records = PostComment.search_for(@content, @method)
     end
+
   end
 end

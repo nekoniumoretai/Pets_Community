@@ -1,23 +1,32 @@
 <!--user検索結果表示用-->
-<div class="row">
-  <% users.each do |user| %>
-    <div class="col-md-４ mb-3">
-      <div class="d-flex align-items-center border rounded p-3">
-        <div>
-          <%= image_tag user.get_profile_image, size: '50x50', class: "mr-2 rounded-circle" %>
-        </div>
-        <div class="flex-grow-1">
-          <div><strong>ニックネーム:</strong> <%= user.nickname %></div>
-          <div>フォロー数: <%= user.followings.count %></div>
-          <div>フォロワー数: <%= user.followers.count %></div>
-        </div>
-        <div class="ml-3">
-          <%= render 'user/relationships/btn', user: user, options: { class: "follow-link" } %>
-        </div>
-        <div class="ml-3">
-          <%= link_to '詳しく見る', user, class: "user-link" %>
+
+<div class="container">
+  <div class="row">
+    <% users.each do |user| %>
+      <div class="col-md-４ mb-3">
+        <div class="d-flex align-items-center border rounded p-3">
+          <div>
+            <%= image_tag user.get_profile_image, size: '50x50', class: "mr-2 rounded-circle" %>
+          </div>
+          <div class="flex-grow-1">
+            <div><strong>ニックネーム:</strong> <%= user.nickname %></div>
+            <div>フォロー数: <%= user.followings.count %></div>
+            <div>フォロワー数: <%= user.followers.count %></div>
+          </div>
+          <div class="ml-3">
+            <%= render 'user/relationships/btn', user: user, options: { class: "follow-link" } %>
+          </div>
+          <div class="ml-3">
+            <%= link_to '詳しく見る', user, class: "user-link" %>
+          </div>
         </div>
       </div>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
+  <div class="row justify-content-center">
+     <% if users.empty? %>
+      <h3>該当するユーザーは見つかりませんでした。</h3>
+    <% end %>
+  </div>
+
 </div>

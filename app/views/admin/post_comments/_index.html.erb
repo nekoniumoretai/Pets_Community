@@ -1,6 +1,7 @@
+<!--コメント検索用ファイル-->
+
 <div class="container mt-5">
-  <h3>コメント一覧</h3>
-  <% if @post_comments.any? %>
+  <% if post_comments.any? %>
     <table class="table mt-3">
       <tr>
         <th class="col-2">名前</th>
@@ -8,10 +9,10 @@
         <th class="col-1">日付</th>
         <th class="col-1"></th>
       </tr>
-      <% @post_comments.each do |post_comment| %>
+      <% post_comments.each do |post_comment| %>
         <tr>
           <td class="col-2"><%= post_comment.user.nickname %></td>
-          <td class="col-8"><%= post_comment.comment %></td>
+          <td class="col-8"><%= "#{post_comment.post.title} / #{post_comment.comment}" %></td>
           <td class="col-1"><%= post_comment.created_at.strftime('%Y/%m/%d') %></td>
           <td class="col-1">
             <%= link_to "削除", admin_post_comment_path(post_comment), method: :delete, data: { confirm: '本当に削除しますか？' },class: "btn btn-sm btn-danger" %>
@@ -19,11 +20,13 @@
         </tr>
       <% end %>
     </table>
-  <% else %>
-    <p>コメントはありません</p>
   <% end %>
-  <div class="row justify-content-center">
-    <%= paginate @post_comments %>
-  </div>
+  <% if post_comments.empty? %>
+    <h3>該当するコメントは見つかりませんでした。</h3>
+  <% end %>
 </div>
+<!--  <div class="row justify-content-center">-->
+    <%#= paginate @post_comments %>
+<!--  </div>-->
+<!--</div>-->
 

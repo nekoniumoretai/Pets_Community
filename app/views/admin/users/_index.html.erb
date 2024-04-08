@@ -12,7 +12,7 @@
           <div>フォロワー数: <%= user.followers.count %></div>
         </div>
         <div class="ml-3">
-          <%= link_to '詳しく見る', user, class: "user-link" %>
+          <%= link_to '詳しく見る', admin_user_path(user), class: "user-link" %>
         </div>
       </div>
     </div>

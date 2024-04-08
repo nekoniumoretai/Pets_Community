@@ -35,7 +35,7 @@ Rails.application.routes.draw do
     get "/search", to: "searches#search"
     patch "notification/:id", to: "notifications#update", as: "notification"
     resources :reports, only: [:new, :create]
-    
+
     resources :posts do
       resources :post_comments, only: [:create, :destroy]
       resource :favorites, only: [:create, :destroy]

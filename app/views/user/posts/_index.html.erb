@@ -1,48 +1,52 @@
 <!--投稿検索用ファイル-->
 
 <div class="container">
-  <h1 class="mb-4">検索結果</h1>
-    <div class="row">
-      <% posts.each do |post| %>
-        <div class="col-md-4 mb-4">
-          <div class="card">
-            <% if post.images.attached? %>
-              <div class="card-img-top">
-                <% post.images.each do |image| %>
-                  <%= image_tag image, class: "card-img-top", alt: "投稿画像" %>
-                <% end %>
-              </div>
-            <% end %>
-            <div class="card-body">
-              <h5 class="card-title"><%= link_to post.title, post_path(post) %></h5>
-              <!--投稿内容を50文字まで表示させる-->
-              <p class="card-text"><%= strip_tags(post.content.to_s).truncate(50) %></p>
+  <div class="row">
+    <% posts.each do |post| %>
+      <div class="col-md-4 mb-4">
+        <div class="card">
+          <% if post.images.attached? %>
+            <div class="card-img-top">
+              <% post.images.each do |image| %>
+                <%= image_tag image, class: "card-img-top", alt: "投稿画像" %>
+              <% end %>
             </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">
-                <strong>ユーザーネーム：</strong>
-                <%= link_to post.user.nickname, user_path(post.user) %>
-                <% if current_user.following?(post.user) %>
-                  <%= link_to "フォローを外す", user_relationships_path(post.user), method: :delete, class: "btn btn-sm btn-outline-primary ml-2" %>
-                <% else %>
-                  <%= link_to "フォローする", user_relationships_path(post.user), method: :post, class: "btn btn-sm btn-primary ml-2" %>
-                <% end %>
-              </li>
-              <li class="list-group-item">
-                <strong>タグ：</strong>
-                <% post.tags.each do |tag| %>
-                  <span class="badge badge-secondary"><%= tag.name %></span>
-                <% end %>
-              </li>
-              <li class="list-group-item">
-                <p>
-                  <%= link_to "#{post.post_comments.count}コメント", post_path(post.id), class: "btn btn-sm btn-outline-secondary mr-3" %>
-                  <%= render 'user/favorites/favorite', post: post %>
-                </p>
-              </li>
-            </ul>
+          <% end %>
+          <div class="card-body">
+            <h5 class="card-title"><%= link_to post.title, post_path(post) %></h5>
+            <!--投稿内容を50文字まで表示させる-->
+            <p class="card-text"><%= strip_tags(post.content.to_s).truncate(50) %></p>
           </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <strong>ユーザーネーム：</strong>
+              <%= link_to post.user.nickname, user_path(post.user) %>
+              <% if current_user.following?(post.user) %>
+                <%= link_to "フォローを外す", user_relationships_path(post.user), method: :delete, class: "btn btn-sm btn-outline-primary ml-2" %>
+              <% else %>
+                <%= link_to "フォローする", user_relationships_path(post.user), method: :post, class: "btn btn-sm btn-primary ml-2" %>
+              <% end %>
+            </li>
+            <li class="list-group-item">
+              <strong>タグ：</strong>
+              <% post.tags.each do |tag| %>
+                <span class="badge badge-secondary"><%= tag.name %></span>
+              <% end %>
+            </li>
+            <li class="list-group-item">
+              <p>
+                <%= link_to "#{post.post_comments.count}コメント", post_path(post.id), class: "btn btn-sm btn-outline-secondary mr-3" %>
+                <%= render 'user/favorites/favorite', post: post %>
+              </p>
+            </li>
+          </ul>
         </div>
-      <% end %>
+      </div>
+    <% end %>
   </div>
+    <% if posts.empty? %>
+      <div class="row justify-content-center">
+         <h3>該当する投稿は見つかりませんでした。</h3>
+      </div>
+    <% end %>
 </div>
