@@ -1,0 +1,16 @@
+<div class= "container py-5 px-sm-0">
+<% if @reports.blank? %>
+ <h4 class= "col-4 offset-4 mt-5 background text-center">報告はありません</h4>
+<% end %>
+<% @reports.each do |report| %>
+  <div class="row">
+    <%= report.reason %>
+    <%= report.content %>
+    <%= report.content_type %>
+    <span>報告日</span><%= report.created_at.strftime('%Y/%m/%d') %>
+  </div>
+<% end %>
+  <div class="row justify-content-center">
+     <%= paginate @reports %>
+　</div>
+</div>
