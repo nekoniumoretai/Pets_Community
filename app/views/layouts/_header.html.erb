@@ -20,20 +20,22 @@
         <% if admin_signed_in? %>
           <li class="nav-item">
             <%= link_to admin_posts_path, class: 'nav-link' do %>
-            <i class="fa-solid fa-signs-post fa-fw mr-1"></i>ユーザーの投稿を確認する
+              <i class="fa-solid fa-signs-post fa-fw mr-1"></i>ユーザーの投稿を確認する
             <% end %>
           </li>
           <li class="nav-item">
             <%= link_to admin_post_comments_path, class: 'nav-link' do %>
-            <i class="fa-regular fa-comment fa-fw mr-1"></i>コメントを確認する
+              <i class="fa-regular fa-comment fa-fw mr-1"></i>コメントを確認する
             <% end %>
           </li>
           <li class="nav-item">
             <%= link_to admin_users_path, class: 'nav-link' do %>
-            <i class="fa-solid fa-users fa-fw mr-1"></i>登録しているユーザーを確認する
+              <i class="fa-solid fa-users fa-fw mr-1"></i>登録しているユーザーを確認する
             <% end %>
           <li class="nav-item">
-            <%= link_to "通報されたされたものを見る", admin_reports_path %>
+            <%= link_to admin_reports_path, class: 'nav-link' do %>
+              <i class="fa-solid fa-flag fa-fw mr-1"></i>通報を確認する
+            <% end %>
           </li>
           </li>
           <li class="nav-item">

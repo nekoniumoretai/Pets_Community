@@ -16,17 +16,17 @@
       <tbody>
         <% @reports.each do |report| %>
           <tr>
-            <td><%= link_to report.id %></td>
+            <td><%= report.id %></td>
             <td><%= report.reported.nickname %></td>
             <td><%= report.reporter.nickname %></td>
             <td><%= report.reason_i18n %></td>
-            <td><%= link_to '該当投稿', admin_post_path(report.content.post.id) %></td>
+            <td><%= link_to '該当投稿', admin_post_path(report.content) %></td>
             <td><%= link_to '対応完了',  admin_report_path(report), method: :delete, data: { confirm:"対応完了として削除しますか？" }, class:"btn btn-danger btn-block" %></td>
           </tr>
         <% end %>
         <% if @reports.empty? %>
           <tr>
-            <td colspan="6" class="text-center"><h3>該当する投稿は見つかりませんでした。</h3></td>
+            <td colspan="6" class="text-center"><h3>通報はありません</h3></td>
           </tr>
         <% end %>
       </tbody>

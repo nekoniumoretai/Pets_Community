@@ -38,7 +38,7 @@ figure.attachment img {
   height: 150px;
 }
 
-/* モーダルの背景 */
+ モーダルの背景 
 .modal {
   display: none;
   position: fixed;
@@ -50,7 +50,7 @@ figure.attachment img {
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-/* モーダルコンテンツ */
+ モーダルコンテンツ 
 .common-modal-content {
   position: absolute;
   top: 50%;
@@ -66,7 +66,7 @@ figure.attachment img {
   max-height: 600px;
 }
 
-/* モーダルのアニメーション */
+ モーダルのアニメーション 
 .modal.fade-in {
   animation: fadeIn 0.3s ease-in;
 }

@@ -41,6 +41,10 @@
           </div>
         </div>
       </div>
+      <div class="report-btn text-right ml-2" id="report-btn-<%= @post.id %>">
+      　<%= render "user/reports/report_btn", comment: @post %>
+      </div>
+
       <% if @post.user == current_user %>
         <div class="row">
           <div class="col-9"></div>
