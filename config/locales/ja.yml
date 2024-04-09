@@ -8,3 +8,6 @@ ja:
         commercial_purposes: 商業目的
         spam: スパム
         other: その他
+        waiting: "対応待ち"
+        keep: "保留"
+        finish: "対応済み"

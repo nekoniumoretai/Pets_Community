@@ -60,6 +60,7 @@ gem 'devise'
 gem 'actiontext'
 gem 'kaminari', '~>1.2.1'
 gem 'activerecord-import'
+gem 'enum_help'
 
 gem 'dotenv-rails'
 group :production do
