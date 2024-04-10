@@ -25,11 +25,6 @@ class User::GroupMessagesController < ApplicationController
     end
   end
 
-  def index
-    rooms = GroupMessage.where(user_id: current_user.id).pluck(:group_id).uniq
-    @groups = Group.where(id: rooms)
-  end
-
   private
 
   def group_message_params

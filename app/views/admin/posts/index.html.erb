@@ -1,24 +1,6 @@
 <!--取得した情報によって投稿一覧のタイトルを変える-->
 <h1 class="mb-4 text-center"><%= params[:user_id] ? "#{@user.nickname}さんの投稿" : "すべての投稿" %></h1>
-<div class="row">
-  <% @posts.each do |post| %>
-    <div class="col-md-4 mb-4">
-      <div class="card">
-        <% if post.images.attached? %>
-          <%= image_tag post.image, class: "card-img-top", alt: "投稿画像" %>
-        <% end %>
-        <div class="card-body">
-          <h5 class="card-title"><%= link_to post.title, admin_post_path(post) %></h5>
-          <!--投稿内容を３０文字まで表示-->
-          <p class="card-text"><%= strip_tags(post.content.to_s).truncate(30) %></p>
-        </div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item"><strong>ユーザーネーム: </strong><%= link_to post.user.nickname, admin_user_path(post.user) %></li>
-        </ul>
-      </div>
-    </div>
-  <% end %>
-  <div class="row justify-content-center">
-    <%= paginate @posts %>
-  </div>
+<%= render 'admin/posts/index', posts: @posts %>
+<div class="row justify-content-center">
+  <%= paginate @posts %>
 </div>

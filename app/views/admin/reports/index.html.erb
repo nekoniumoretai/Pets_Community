@@ -1,35 +1,31 @@
 <div class="container">
   <h3>通報一覧</h3>
 
-  <div class="table-responsive">
-    <table class="table table-bordered">
-      <thead class="thead-dark">
-        <tr>
-          <th scope="col">通報ID</th>
-          <th scope="col">会員名</th>
-          <th scope="col">通報者</th>
-          <th scope="col">通報理由</th>
-          <th scope="col">対象のコンテンツ</th>
-          <th scope="col">対応</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @reports.each do |report| %>
-          <tr>
-            <td><%= report.id %></td>
-            <td><%= report.reported.nickname %></td>
-            <td><%= report.reporter.nickname %></td>
-            <td><%= report.reason_i18n %></td>
-            <td><%= link_to '該当投稿', admin_post_path(report.content) %></td>
-            <td><%= link_to '対応完了',  admin_report_path(report), method: :delete, data: { confirm:"対応完了として削除しますか？" }, class:"btn btn-danger btn-block" %></td>
-          </tr>
-        <% end %>
-        <% if @reports.empty? %>
-          <tr>
-            <td colspan="6" class="text-center"><h3>通報はありません</h3></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
+  <% if @reports.present? %>
+    <ul class="list-group mt-3">
+      <% @reports.each do |report| %>
+      <div class="row">
+        <div class="col">
+          <li class="list-group-item">
+            <strong>通報ID:</strong> <%= report.id %><br>
+            <strong>通報対象ユーザー:</strong> <%= report.reported.nickname %><br>
+            <strong>通報ユーザー:</strong> <%= report.reporter.nickname %><br>
+            <strong>通報理由:</strong> <%= report.reason_i18n %><br>
+            <strong>対象のコンテンツ:</strong> <%= link_to '該当投稿を見る', admin_post_path(report.content) %><br>
+            <div class="col-3">
+              <%= link_to '対応完了',  admin_report_path(report), method: :delete, data: { confirm:"対応完了として削除しますか？" }, class:"btn btn-danger mt-3 btn-block" %>
+            </div>
+          </li>
+        </div>
+      </div>
+      <% end %>
+    </ul>
+  <% else %>
+    <div class="row justify-content-center">
+      <h4>通報はありません</h4>
+    </div>
+  <% end %>
+    <div class="row justify-content-center">
+      <%= paginate @reports %>
+    </div>
 </div>

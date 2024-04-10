@@ -9,8 +9,8 @@
     <div class="col-md-6 text-center">
       <%= image_tag @user.get_profile_image, class: "rounded-circle", size: "100x100" %>
       <p><strong>ニックネーム:</strong> <%= @user.nickname %></p>
-      <p>フォロー数: <%= @user.followings.count %></p>
-      <p>フォロワー数: <%= @user.followers.count %></p>
+      <p>フォロー数: <%= link_to "#{@user.followings.count}", user_followings_path(@user) %></p>
+      <p>フォロワー数: <%= link_to "#{@user.followers.count}", user_followers_path(@user) %></p>
       <% if @user == current_user %>
         <p><strong>メールアドレス:</strong> <%= @user.email %></p>
       <% end %>

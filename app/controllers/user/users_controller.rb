@@ -39,7 +39,6 @@ class User::UsersController < ApplicationController
     @group_users = Group.where(id: group_user_ids + owner_group_ids).order(created_at: :desc)
   end
 
-
   private
 
   def check_user_status

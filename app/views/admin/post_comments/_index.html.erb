@@ -1,32 +1,33 @@
 <!--コメント検索用ファイル-->
 
 <div class="container mt-5">
-  <% if post_comments.any? %>
-    <table class="table mt-3">
-      <tr>
-        <th class="col-2">名前</th>
-        <th class="col-8">コメント</th>
-        <th class="col-1">日付</th>
-        <th class="col-1"></th>
-      </tr>
-      <% post_comments.each do |post_comment| %>
-        <tr>
-          <td class="col-2"><%= post_comment.user.nickname %></td>
-          <td class="col-8"><%= "#{post_comment.post.title} / #{post_comment.comment}" %></td>
-          <td class="col-1"><%= post_comment.created_at.strftime('%Y/%m/%d') %></td>
-          <td class="col-1">
-            <%= link_to "削除", admin_post_comment_path(post_comment), method: :delete, data: { confirm: '本当に削除しますか？' },class: "btn btn-sm btn-danger" %>
-          </td>
-        </tr>
-      <% end %>
-    </table>
-  <% end %>
-  <% if post_comments.empty? %>
-    <h3>該当するコメントは見つかりませんでした。</h3>
-  <% end %>
+  <div class="row">
+    <% if post_comments.any? %>
+      <div class="col-12">
+        <table class="table text-center mt-3">
+          <tr>
+            <th class="col-2">ユーザー名</th>
+            <th class="col-7">該当投稿とコメント内容</th>
+            <th class="col-2">日付</th>
+            <th class="col-1"></th>
+          </tr>
+          <% post_comments.each do |post_comment| %>
+            <tr>
+              <td><%= link_to "#{post_comment.user.nickname}", admin_user_path(post_comment.user) %></td>
+              <td><%= link_to "#{post_comment.post.title} / #{post_comment.comment}", admin_post_path(post_comment.post) %></td>
+              <td><%= post_comment.created_at.in_time_zone('Asia/Tokyo').strftime('%Y年%m月%d日 %H:%M') %></td>
+              <td>
+                <%= link_to "削除", admin_post_comment_path(post_comment), method: :delete, data: { confirm: '本当に削除しますか？' },class: "btn btn-sm btn-danger" %>
+              </td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+    <% end %>
+    <% if post_comments.empty? %>
+      <div class="col-12 text-center">
+        <h3>コメントはありません</h3>
+      </div>
+    <% end %>
+  </div>
 </div>
-<!--  <div class="row justify-content-center">-->
-    <%#= paginate @post_comments %>
-<!--  </div>-->
-<!--</div>-->
-

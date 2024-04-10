@@ -6,17 +6,10 @@
     <% posts.each do |post| %>
       <div class="col-md-4 mb-4">
         <div class="card">
-          <% if post.images.attached? %>
-            <div class="card-img-top">
-              <% post.images.each do |image| %>
-                <%= image_tag image, class: "card-img-top", alt: "投稿画像" %>
-              <% end %>
-            </div>
-          <% end %>
           <div class="card-body">
             <h5 class="card-title"><%= link_to post.title, admin_post_path(post) %></h5>
-            <!--投稿内容を50文字まで表示させる-->
-            <p class="card-text"><%= strip_tags(post.content.to_s).truncate(50) %></p>
+            <!--投稿内容を30文字まで表示させる-->
+            <p class="card-text"><%= strip_tags(post.content.to_s).truncate(30) %></p>
           </div>
           <ul class="list-group list-group-flush">
             <li class="list-group-item">
@@ -38,6 +31,8 @@
         </div>
       </div>
     <% end %>
+  </div>
+  <div class="row justify-content-center">
     <% if posts.empty? %>
       <h3>該当する投稿は見つかりませんでした。</h3>
     <% end %>
