@@ -8,7 +8,7 @@
         <div class="col">
           <li class="list-group-item">
             <strong>通報ID:</strong> <%= report.id %><br>
-            <strong>通報対象ユーザー:</strong> <%= report.reported.nickname %><br>
+            <strong>通報対象ユーザー:</strong> <%= link_to "#{report.reported.nickname}", admin_user_path(report.reported) %><br>
             <strong>通報ユーザー:</strong> <%= report.reporter.nickname %><br>
             <strong>通報理由:</strong> <%= report.reason_i18n %><br>
             <strong>対象のコンテンツ:</strong> <%= link_to '該当投稿を見る', admin_post_path(report.content) %><br>
