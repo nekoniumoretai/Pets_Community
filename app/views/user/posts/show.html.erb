@@ -41,9 +41,6 @@
           </div>
         </div>
       </div>
-      <div class="report-btn text-right ml-2" id="report-btn-<%= @post.id %>">
-      　<%= render "user/reports/report_btn", comment: @post %>
-      </div>
 
       <% if @post.user == current_user %>
         <div class="row">
@@ -54,9 +51,14 @@
         </div>
       <% else %>
         <div class="row">
-          <div class="col-9"></div>
-          <div class="col-3 text-center">
+          <div class="col-8"></div>
+          <div class="col-3">
             <%= link_to "投稿一覧に戻る", posts_path, class: "btn btn-secondary btn-block mt-1" %>
+          </div>
+          <div class="col-1">
+            <div class="report-btn text-right ml-1" id="report-btn-<%= @post.id %>">
+            　<%= render "user/reports/report_btn", comment: @post %>
+            </div>
           </div>
         </div>
       <% end %>
