@@ -13,6 +13,8 @@
       <p>フォロワー数: <%= link_to "#{@user.followers.count}", user_followers_path(@user) %></p>
       <% if @user == current_user %>
         <p><strong>メールアドレス:</strong> <%= @user.email %></p>
+      <% else %>
+        <%= render 'user/relationships/btn', user: @user %>
       <% end %>
       <p><strong>自己紹介:</strong></p>
       <div class="readmore">
