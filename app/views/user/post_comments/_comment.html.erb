@@ -20,7 +20,7 @@
         </span>
       <% end %>
       <div class="report-btn text-right ml-2" id="report-btn-<%= post_comment.id %>">
-      　<%= render "user/reports/report_btn", comment: post_comment %>
+      　<%= render "user/reports/report_btn", report: post_comment, model: 'PostComment' %>
       </div>
     </div>
   <% end %>

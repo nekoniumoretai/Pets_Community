@@ -57,7 +57,7 @@
           </div>
           <div class="col-1">
             <div class="report-btn text-right ml-1" id="report-btn-<%= @post.id %>">
-            　<%= render "user/reports/report_btn", comment: @post %>
+            　<%= render "user/reports/report_btn", report: @post, model: 'Post' %>
             </div>
           </div>
         </div>

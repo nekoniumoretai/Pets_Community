@@ -1,8 +1,7 @@
  <!-- モーダルウィンドウのトリガーボタンを追加 -->
 <i class="fas fa-ellipsis-v open-report-modal-button"
-    data-comment-id="<%= comment.id %>"
-    data-content-id="<%= comment.id %>"
-    data-content-type="Post"
+    data-content-id="<%= report.id %>"
+    data-content-type="<%= model %>"
     data-report-success="true"
     style="cursor: pointer;">
 </i>
@@ -15,7 +14,7 @@
 $(document).ready(function() {
   // モーダルウィンドウを開くボタンがクリックされたときの処理
   $('.open-report-modal-button').click(function() {
-    const commentId = $(this).data("comment-id");
+    const commentId = $(this).data("content-id");
 
     // Ajaxリクエストを送信して報告フォームを取得
     $.ajax({
