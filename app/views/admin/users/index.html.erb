@@ -7,7 +7,7 @@
         <% @users.each do |user| %>
           <li class="list-group-item d-flex justify-content-between align-items-center">
             <div class="d-flex align-items-center">
-              <%= image_tag user.profile_image, size: '50x50', class: "mr-3 rounded-circle" %>
+              <%= image_tag user.get_profile_image, size: '50x50', class: "mr-3 rounded-circle" %>
               <div>
                 <h5><%= link_to user.nickname, admin_user_path(user) %></h5>
                 <p><%= truncate(user.introduction, length: 50) %></p>
