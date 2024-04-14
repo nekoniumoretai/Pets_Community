@@ -27,14 +27,18 @@ pets = [
     {name: '武蔵', gender: 'メス', kind: '柴犬'},
     {name: 'しらす', gender: 'メス', kind: '柴犬'},
     {name: 'あおい', gender: 'メス', kind: '猫'},
+    {name: 'ゴロピー', gender: '不明', kind: 'ヒョウモントカゲモドキ'},
+    {name: 'もも', gender: 'オス', kind: 'ネザーランドドワーフ'},
+    {name: 'くぅ', gender: 'メス', kind: 'オカメインコ'},
 ]
 
 # 投稿一覧
 posts = [
-    {title: 'お世話の方法', contents: 'お世話の方法について知りたいです。',
+    {title: 'お世話の方法', content: 'お世話の方法について知りたいです。',
         post_comments: [
             {comment: 'トリミングが大切です。'},
-            {comment: '日々の運動が大切です。'}
+            {comment: '日々の運動が大切です。'},
+            {comment: 'もう少し具体的に教えてください！'}
         ],
         tags: Tag.where(name: ['ねこ', '相談']).ids
     },
@@ -48,7 +52,9 @@ posts = [
     {title: '食事について', content: '健康的な食事の方法について知りたいです。',
         post_comments: [
             {comment: '味の濃いものは避けましょう。'},
-            {comment: 'ペットフードでもバランスの良いものを選びましょう。'}
+            {comment: 'ペットフードでもバランスの良いものを選びましょう。'},
+            {comment: '人間食は基本NGです。'},
+            {comment: '手間ですが、手作り食が一番ですね。'}
         ],
         tags: Tag.where(name: ['鳥', '質問']).ids
     },
@@ -57,7 +63,21 @@ posts = [
             {comment: '他の人に迷惑にならない程度にお気に入りのおもちゃを持っていくと良いです。'},
             {comment: '他の子と喧嘩にならないようにしっかりと見ておくのも大切です。'}
         ],
-        tags: Tag.where(name: ['爬虫類', '質問']).ids
+        tags: Tag.where(name: ['犬', '質問', '相談']).ids
+    },
+    {title: 'うさぎのあるある', content: 'ウサギは臆病で安全な環境が必要。食事は高い野菜が必須。規則正しい清潔なケアが重要。定期的な健康チェックが必要。足運動と遊びがストレス解消になります。',
+        post_comments: [
+            {comment: '参考になります！'},
+            {comment: 'ストレスケア大切ですよね。'}
+        ],
+        tags: Tag.where(name: ['小動物']).ids
+    },
+    {title: '助けてください', content: 'レオパのご飯で生き餌が良いらしいのですが、生きた昆虫が無理です・・・。どうしたら良いですか？',
+        post_comments: [
+            {comment: '冷凍された物も販売していますよ！'},
+            {comment: '私は仕方がないと、諦めて腹括ってます！'}
+        ],
+        tags: Tag.where(name: ['爬虫類', '質問', '相談']).ids
     }
 ]
 
@@ -76,7 +96,7 @@ users.each do |user|
         post_data = user_data.posts.find_or_initialize_by(title: post[:title]) # postのnew
         if post_data.new_record? # postに重複がなければ
             post_data.save(validate: false) # バリデーションを無視して登録(ActionText対策)
-            ActionText::RichText.create(record_type: 'Post', record_id: Post.all.last, name: 'content', body: post[:content]) # ActionTextの登録
+            ActionText::RichText.create(record_type: 'Post', record_id: post_data.id, name: 'content', body: post[:content]) # ActionTextの登録
 
             # コメント一覧を配列で生成する(map)
             post_comments = post[:post_comments].map do |post_comment|
