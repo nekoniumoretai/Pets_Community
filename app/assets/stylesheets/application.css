@@ -37,10 +37,22 @@ footer{
   overflow-y: auto;
 }
 
+/*投稿画像クリック後*/
+.bg-black {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, .8);
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    z-index: 9999;
+  }
+
 /*rich textの投稿画像サイズ指定*/
 figure.attachment img {
-  width: 150px;
-  height: 150px;
+  width: 400px;
+  height: 400px;
 }
 
 /* モーダルの背景 */

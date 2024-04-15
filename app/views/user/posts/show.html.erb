@@ -71,3 +71,22 @@
     </div>
   </div>
 </div>
+
+
+<div class="img-box">
+  <div class="container d-flex w-100 h-100 justify-content-center align-items-center">
+    <img class="img-box__inner img-fluid" src="" />
+  </div>
+</div>
+
+<script>
+  // 画像クリックした際の簡易モーダル
+  $('.attachment--preview > img').click(function () {
+    $('.img-box').addClass('bg-black');
+    $('.img-box__inner').attr('src', $(this).attr('src'));
+  });
+
+  $('.img-box').click(function () {
+    $('.img-box').removeClass('bg-black');
+  });
+</script>

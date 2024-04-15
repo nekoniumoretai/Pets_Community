@@ -1,12 +1,21 @@
 <div class="container">
   <div class="row justify-content-center">
-    <h3>フォロー一覧</h3>
-    <ul>
-      <% @users.each do |user| %>
-        <li>
-          <%= link_to "#{user.nickname}", user_path(user) %>
-        </li>
+    <div class="col-md-6">
+      <h3 class="text-center">フォロー一覧</h3>
+      <ul>
+        <% @users.each do |user| %>
+          <li>
+            <%= link_to "#{user.nickname}", user_path(user) %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+  <div class="row justify-content-center mt-4">
+    <div class="col-md-6">
+      <% if @users.empty? %>
+        <p class="text-center">フォローしているユーザーはいません</p>
       <% end %>
-    </ul>
+    </div>
   </div>
 </div>
