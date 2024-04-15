@@ -24,7 +24,7 @@ class User::UsersController < ApplicationController
       redirect_to user_path(@user), notice: "ユーザー情報を更新しました"
     else
       flash.now[:alert] = "ニックネームとメールアドレスを入力してください"
-      render 'edit'
+      render "edit"
     end
   end
 
@@ -40,27 +40,25 @@ class User::UsersController < ApplicationController
   end
 
   private
-
-  def check_user_status
-    @user = User.find(params[:id])
-    if @user.is_active == false
-      redirect_to root_path, alert: "このアカウントは停止されています。"
+    def check_user_status
+      @user = User.find(params[:id])
+      if @user.is_active == false
+        redirect_to root_path, alert: "このアカウントは停止されています。"
+      end
     end
-  end
 
-  def get_user
-    @user = User.find(params[:id])
-  end
-
-  def ensure_guest_user
-    @user = User.find(params[:id])
-    if @user.guest_user?
-      redirect_to user_path(current_user) , alert: "ゲストユーザーはプロフィール編集画面へ遷移できません。"
+    def get_user
+      @user = User.find(params[:id])
     end
-  end
 
-  def user_params
-    params.require(:user).permit(:nickname, :introduction, :email, :profile_image, :is_active)
-  end
+    def ensure_guest_user
+      @user = User.find(params[:id])
+      if @user.guest_user?
+        redirect_to user_path(current_user), alert: "ゲストユーザーはプロフィール編集画面へ遷移できません。"
+      end
+    end
+
+    def user_params
+      params.require(:user).permit(:nickname, :introduction, :email, :profile_image, :is_active)
+    end
 end
-

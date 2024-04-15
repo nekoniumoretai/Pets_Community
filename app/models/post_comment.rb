@@ -15,14 +15,14 @@ class PostComment < ApplicationRecord
 
   # 検索機能のメソッド
   def self.search_for(content, method)
-    if method == 'perfect'
+    if method == "perfect"
       PostComment.where(comment: content)
-    elsif method == 'forward'
-      PostComment.where('comment LIKE ?', content + '%')
-    elsif method == 'backward'
-      PostComment.where('comment LIKE ?', '%' + content)
+    elsif method == "forward"
+      PostComment.where("comment LIKE ?", content + "%")
+    elsif method == "backward"
+      PostComment.where("comment LIKE ?", "%" + content)
     else
-      PostComment.where('comment LIKE ?', '%' + content + '%')
+      PostComment.where("comment LIKE ?", "%" + content + "%")
     end
   end
 end

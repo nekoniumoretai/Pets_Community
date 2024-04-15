@@ -16,17 +16,15 @@ class User::PetsController < ApplicationController
       redirect_to user_pets_path(current_user), notice: "登録しました"
     else
       flash.now[:alert] = "必須項目を入力してください"
-      render 'new'
+      render "new"
     end
   end
 
   def index
-
     @pets = @user.pets.order(created_at: :desc)
   end
 
   def show
-
   end
 
   def edit; end
@@ -38,7 +36,7 @@ class User::PetsController < ApplicationController
       redirect_to user_pet_path(current_user), notice: "登録内容を変更しました"
     else
       flash.now[:alert] = "必須項目を入力してください"
-      render 'edit'
+      render "edit"
     end
   end
 
@@ -48,17 +46,15 @@ class User::PetsController < ApplicationController
   end
 
   private
+    def get_pet
+      @pet = Pet.find(params[:id])
+    end
 
-  def get_pet
-    @pet = Pet.find(params[:id])
-  end
+    def get_user
+      @user = User.find(params[:user_id])
+    end
 
-  def get_user
-    @user = User.find(params[:user_id])
-  end
-
-  def pet_params
-    params.require(:pet).permit(:name, :gender, :birthday, :kind, :introduction, :image)
-  end
-
+    def pet_params
+      params.require(:pet).permit(:name, :gender, :birthday, :kind, :introduction, :image)
+    end
 end

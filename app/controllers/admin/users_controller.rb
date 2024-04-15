@@ -6,9 +6,9 @@ class Admin::UsersController < ApplicationController
     @users = User.page(params[:page]).per(25)
   end
 
-  def show ;end
+  def show ; end
 
-  def edit ;end
+  def edit ; end
 
   def update
     if @user.update(user_params)
@@ -19,12 +19,11 @@ class Admin::UsersController < ApplicationController
   end
 
   private
-  
-  def get_user
-    @user = User.find(params[:id])
-  end
-  
-  def user_params
-    params.require(:user).permit(:nickname, :introduction, :email, :profile_image, :is_active)
-  end
+    def get_user
+      @user = User.find(params[:id])
+    end
+
+    def user_params
+      params.require(:user).permit(:nickname, :introduction, :email, :profile_image, :is_active)
+    end
 end

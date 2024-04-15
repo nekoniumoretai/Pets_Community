@@ -12,9 +12,7 @@ class Admin::ReportsController < ApplicationController
   end
 
   private
-
-  def report_params
-    params.require(:report).permit(:is_checked, :reason, :content, :content_type)
-  end
-
+    def report_params
+      params.require(:report).permit(:is_checked, :reason, :content, :content_type)
+    end
 end

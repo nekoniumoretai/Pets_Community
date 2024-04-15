@@ -23,12 +23,11 @@ class Admin::PostsController < ApplicationController
   end
 
   private
+    def get_post
+      @post = Post.find(params[:id])
+    end
 
-  def get_post
-    @post = Post.find(params[:id])
-  end
-
-  def post_params
-    params.require(:post).permit(:title, :content, tag_ids: [], images: [])
-  end
+    def post_params
+      params.require(:post).permit(:title, :content, tag_ids: [], images: [])
+    end
 end

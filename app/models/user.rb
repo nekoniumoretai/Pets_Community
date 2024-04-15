@@ -52,8 +52,8 @@ class User < ApplicationRecord
   # ユーザーのプロフィールイメージのメソッド
   def get_profile_image
     unless profile_image.attached?
-      file_path = Rails.root.join('app/assets/images/no_image.jpg')
-      profile_image.attach(io: File.open(file_path), filename: 'no_image.jpg', content_type: 'image/jpeg')
+      file_path = Rails.root.join("app/assets/images/no_image.jpg")
+      profile_image.attach(io: File.open(file_path), filename: "no_image.jpg", content_type: "image/jpeg")
     end
     profile_image.variant(resize_to_limit: [100, 100]).processed
   end
@@ -73,14 +73,14 @@ class User < ApplicationRecord
 
   # 検索機能のメソッド
   def self.search_for(content, method)
-    if method == 'perfect'
+    if method == "perfect"
       User.where(nickname: content)
-    elsif method == 'forward'
-      User.where('nickname LIKE ?', content + '%')
-    elsif method == 'backward'
-      User.where('nickname LIKE ?', '%' + content)
+    elsif method == "forward"
+      User.where("nickname LIKE ?", content + "%")
+    elsif method == "backward"
+      User.where("nickname LIKE ?", "%" + content)
     else
-      User.where('nickname LIKE ?', '%' + content + '%')
+      User.where("nickname LIKE ?", "%" + content + "%")
     end
   end
 end

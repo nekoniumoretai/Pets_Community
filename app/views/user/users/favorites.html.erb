@@ -1,11 +1,10 @@
 <div class="container">
   <h2>いいねした投稿一覧</h2>
-  <p>（投稿タイトルをクリックして詳細が確認できます）</p>
     <% if @favorite_posts.any? %>
       <ul>
         <% @favorite_posts.each do |post| %>
           <li>
-            <%= link_to post.title, post_path(post), class: "favorite-link" %>
+            <%= link_to post.title, post_path(post) %>
           </li>
         <% end %>
       </ul>

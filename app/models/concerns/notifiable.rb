@@ -1,4 +1,4 @@
-require 'active_support' # Railsでモジュールを扱いやすくするために必要な記述になります
+require "active_support" # Railsでモジュールを扱いやすくするために必要な記述になります
 
 module Notifiable
   extend ActiveSupport::Concern # Railsでモジュールを扱いやすくするために必要な記述になります

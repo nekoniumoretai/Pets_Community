@@ -2,7 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
-// ユーザーの詳細画面：自己紹介
+// ユーザーの詳細画面：自己紹介「続きを見る」の動き
 .readmore {
   position: relative;
   margin: 50px auto 0;
@@ -61,19 +61,4 @@
 
 .readmore input[type="checkbox"]:checked ~ .readmore-content::before {
   display: none;
-}
-
-// 参加中グループ画面のリンク色指定
-.group-link{
-  color: #191970;
-}
-
-// いいねした投稿のリンク色指定
-.favorite-link{
-  color: #191970;
-}
-
-// ユーザー検索ページのリンク色指定
-.user-link{
-  color: #191970;
 }

@@ -20,18 +20,18 @@ class Post < ApplicationRecord
 
   # 検索機能のメソッド
   def self.search_for(content, method)
-    if method == 'perfect'
+    if method == "perfect"
       Post.where(title: content)
-    elsif method == 'forward'
-      Post.where('title LIKE ?', content + '%')
-    elsif method == 'backward'
-      Post.where('title LIKE ?', '%' + content)
+    elsif method == "forward"
+      Post.where("title LIKE ?", content + "%")
+    elsif method == "backward"
+      Post.where("title LIKE ?", "%" + content)
     else
-      Post.where('title LIKE ?', '%' + content + '%')
+      Post.where("title LIKE ?", "%" + content + "%")
     end
   end
-  
-  #通知機能のメソッド
+
+  # 通知機能のメソッド
   after_create do
     records = user.followers.map do |follower|
       notifications.new(user_id: follower.id)

@@ -13,7 +13,7 @@ class User::PostsController < ApplicationController
     else
       @posts = Post.all
       flash.now[:alert] = "タイトルと本文を入力してください"
-      render 'new'
+      render "new"
     end
   end
 
@@ -36,7 +36,7 @@ class User::PostsController < ApplicationController
     @post_comment = PostComment.new
   end
 
-  def edit;end
+  def edit; end
 
   def update
     post = Post.find(params[:id])
@@ -54,12 +54,11 @@ class User::PostsController < ApplicationController
   end
 
   private
+    def get_post
+      @post = Post.find(params[:id])
+    end
 
-  def get_post
-    @post = Post.find(params[:id])
-  end
-
-  def post_params
-    params.require(:post).permit(:title, :content, tag_ids: [], images: [])
-  end
+    def post_params
+      params.require(:post).permit(:title, :content, tag_ids: [], images: [])
+    end
 end

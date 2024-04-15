@@ -13,7 +13,7 @@ class User::GroupsController < ApplicationController
       redirect_to groups_path, notice: "コミュニティを作成しました"
     else
       flash.now[:alert] = "グループ名、グループ紹介文を入力してください"
-      render 'new'
+      render "new"
     end
   end
 
@@ -25,34 +25,33 @@ class User::GroupsController < ApplicationController
     @group = Group.find(params[:id])
   end
 
-  def edit;end
+  def edit; end
 
   def update
     if @group.update(group_params)
       redirect_to group_path(@group), notice: "コミュニティを編集しました"
     else
       flash.now[:alert] = "グループ名、グループ紹介文を入力してください"
-      render 'edit'
+      render "edit"
     end
   end
 
   def destroy
     delete_group = Group.find(params[:id])
     delete_group.destroy
-    redirect_to groups_path, notice: 'グループを削除しました。'
+    redirect_to groups_path, notice: "グループを削除しました。"
   end
 
   private
-
-  #作成したグループが current_user.id == owner.idなのかを確認し、他人のグループの編集を行えないようにするメソッド
-  def ensure_correct_user
-    @group = Group.find(params[:id])
-    unless @group.owner_id == current_user.id
-      redirect_to groups_path
+    # 作成したグループが current_user.id == owner.idなのかを確認し、他人のグループの編集を行えないようにするメソッド
+    def ensure_correct_user
+      @group = Group.find(params[:id])
+      unless @group.owner_id == current_user.id
+        redirect_to groups_path
+      end
     end
-  end
 
-  def group_params
-    params.require(:group).permit(:name, :introduction, :group_image)
-  end
+    def group_params
+      params.require(:group).permit(:name, :introduction, :group_image)
+    end
 end
