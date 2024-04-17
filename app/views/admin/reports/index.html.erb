@@ -12,7 +12,7 @@
             <strong>通報対象ユーザー:</strong> <%= link_to "#{report.reported.nickname}", admin_user_path(report.reported) %><br>
             <strong>通報ユーザー:</strong> <%= report.reporter.nickname %><br>
             <strong>通報理由:</strong> <%= report.reason_i18n %><br>
-            <strong>対象のコンテンツ:</strong> <%= link_to '該当投稿を見る', admin_post_path(report.content) %><br>
+            <strong>対象のコンテンツ:</strong> <%= link_to '該当投稿を見る', admin_post_path(report.content.user) %><br>
             <div class="col-3">
               <%= link_to '対応完了',  admin_report_path(report), method: :delete, data: { confirm:"対応完了として削除しますか？" }, class:"btn btn-danger mt-3 btn-block" %>
             </div>
