@@ -1,6 +1,7 @@
 class User::PostsController < ApplicationController
   before_action :authenticate_user!
-  before_action :get_post, only: [:show, :edit]
+  before_action :get_post, only: [:show, :edit, :update, :destroy]
+  before_action :is_matching_login_user, only: [:edit, :update, :destroy]
 
   def new
     @post = Post.new
@@ -39,23 +40,27 @@ class User::PostsController < ApplicationController
   def edit; end
 
   def update
-    post = Post.find(params[:id])
-    post.update(post_params)
+    @post.update(post_params)
     redirect_to post_path(post.id), notice: "投稿内容を変更しました"
   end
 
   def destroy
-    post = Post.find(params[:id])
-    post.post_comments.destroy_all
-    post.favorites.destroy_all
-    post.tags.destroy_all
-    post.delete
+    @post.post_comments.destroy_all
+    @post.favorites.destroy_all
+    @post.tags.destroy_all
+    @post.delete
     redirect_to posts_path, notice: "投稿を削除しました"
   end
 
   private
     def get_post
       @post = Post.find(params[:id])
+    end
+
+    def is_matching_login_user
+      unless @post.user == current_user
+      redirect_to post_path
+      end
     end
 
     def post_params

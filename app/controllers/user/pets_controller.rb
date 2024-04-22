@@ -2,6 +2,7 @@ class User::PetsController < ApplicationController
   before_action :authenticate_user!
   before_action :get_pet, only: [:show, :edit, :update, :destroy]
   before_action :get_user, only: [:index, :show]
+  before_action :get_user_and_check_matching, only: [:edit, :update]
 
   def new
     @pet = Pet.new
@@ -24,8 +25,7 @@ class User::PetsController < ApplicationController
     @pets = @user.pets.order(created_at: :desc)
   end
 
-  def show
-  end
+  def show; end
 
   def edit; end
 
@@ -52,6 +52,13 @@ class User::PetsController < ApplicationController
 
     def get_user
       @user = User.find(params[:user_id])
+    end
+
+    def get_user_and_check_matching
+      @user = User.find(params[:user_id])
+      unless @user.id == current_user.id
+      redirect_to user_pets_path
+      end
     end
 
     def pet_params

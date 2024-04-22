@@ -1,5 +1,4 @@
 class User::FavoritesController < ApplicationController
-  before_action :authenticate_user!
   before_action :get_post, only: [:create, :destroy]
 
   def create

@@ -3,6 +3,7 @@ class User::UsersController < ApplicationController
   before_action :check_user_status, only: [:edit, :update]
   before_action :get_user, only: [:show, :favorites, :groups]
   before_action :ensure_guest_user, only: [:edit]
+  before_action :is_matching_login_user, only: [:edit, :update]
 
   def index
     @users = User.page(params[:page])
@@ -14,12 +15,9 @@ class User::UsersController < ApplicationController
     @posts = @user.posts
   end
 
-  def edit
-    @user = current_user
-  end
+  def edit; end
 
   def update
-    @user = current_user
     if @user.update(user_params)
       redirect_to user_path(@user), notice: "ユーザー情報を更新しました"
     else
@@ -49,6 +47,12 @@ class User::UsersController < ApplicationController
 
     def get_user
       @user = User.find(params[:id])
+    end
+
+    def is_matching_login_user
+      unless @user.id == current_user.id
+      redirect_to user_path
+      end
     end
 
     def ensure_guest_user
