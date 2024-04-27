@@ -13,8 +13,12 @@ class User::PostCommentsController < ApplicationController
 
   def destroy
     @post_comment = @post.post_comments.find(params[:id])
-    @post_comment.destroy
-    render "user/post_comments/create"
+    if @post_comment.user == current_user
+      @post_comment.destroy
+      render "user/post_comments/create"
+    else
+      redirect_to root_path
+    end
   end
 
   private

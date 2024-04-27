@@ -57,7 +57,7 @@ class User::PetsController < ApplicationController
     def get_user_and_check_matching
       @user = User.find(params[:user_id])
       unless @user.id == current_user.id
-      redirect_to user_pets_path
+        redirect_to user_pets_path
       end
     end
 

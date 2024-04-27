@@ -51,7 +51,7 @@ class User::UsersController < ApplicationController
 
     def is_matching_login_user
       unless @user.id == current_user.id
-      redirect_to user_path
+        redirect_to user_path
       end
     end
 

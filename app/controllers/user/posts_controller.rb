@@ -59,7 +59,7 @@ class User::PostsController < ApplicationController
 
     def is_matching_login_user
       unless @post.user == current_user
-      redirect_to post_path
+        redirect_to post_path
       end
     end
 
