@@ -12,7 +12,7 @@ class Admin::PostsController < ApplicationController
     @posts = @posts.page(params[:page]).per(25)
   end
 
-  def show ; end
+  def show; end
 
   def destroy
     @post.post_comments.destroy_all
