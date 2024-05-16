@@ -87,6 +87,7 @@
               <%= link_to "投稿する", new_post_path, class: 'dropdown-item' %>
               <%= link_to "自分の投稿を見る", user_posts_path(current_user), class: 'dropdown-item' %>
               <%= link_to "みんなの投稿を見る", posts_path, class: 'dropdown-item' %>
+              <%= link_to "フォローしているユーザーの投稿を見る",  post_followings_path(current_user), class: 'dropdown-item' %>
               <%= link_to "いいねした投稿を見る", favorites_user_path(current_user), class: 'dropdown-item' %>
            </div>
           </li>

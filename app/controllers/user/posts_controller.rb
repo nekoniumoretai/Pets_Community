@@ -25,11 +25,12 @@ class User::PostsController < ApplicationController
       if params[:user_id]
         @user = User.find(params[:user_id])
         @posts = Post.where(user_id: params[:user_id]).order(created_at: :desc)
+      # elsif params[:user_id]
+      #   @posts = Post.where(user_id: [*current_user.following_ids])
       else
         @posts = Post.order(created_at: :desc)
       end
     end
-
     @posts = @posts.page(params[:page]).per(14)
   end
 
@@ -50,6 +51,10 @@ class User::PostsController < ApplicationController
     @post.tags.destroy_all
     @post.delete
     redirect_to posts_path, notice: "投稿を削除しました"
+  end
+
+  def followings
+    @following_posts = Post.where(use_id: [*current_user.following_ids])
   end
 
   private

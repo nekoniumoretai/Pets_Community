@@ -39,6 +39,7 @@ Rails.application.routes.draw do
     resources :posts do
       resources :post_comments, only: [:create, :destroy]
       resource :favorites, only: [:create, :destroy]
+      get :followings
     end
 
     get "group_messages" => "group_messages#index"
