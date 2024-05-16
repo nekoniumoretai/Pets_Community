@@ -29,7 +29,7 @@ class User::PostsController < ApplicationController
         @posts = Post.order(created_at: :desc)
       end
     end
-    @posts = @posts.page(params[:page]).per(14)
+    @posts = @posts.page(params[:page]).per(15)
   end
 
   def show
@@ -52,7 +52,11 @@ class User::PostsController < ApplicationController
   end
 
   def followings
-    @posts = Post.where(user_id: [*current_user.following_ids])
+    if params[:user_id]
+      @posts = Post.where(user_id: [*current_user.following_ids])
+    else
+      @posts = Post.page(params[:page]).per(15)
+    end
   end
 
   private

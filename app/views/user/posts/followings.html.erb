@@ -1,5 +1,2 @@
-<h1>フォローしている人の投稿</h1>
-
-<% @posts.each do |post| %>
-<%= render 'user/posts/index', posts: @posts %>
-<% end %>
+<h1 class="following_posts">フォローしている人の投稿</h1>
+  <%= render 'user/posts/index', posts: @posts %>
