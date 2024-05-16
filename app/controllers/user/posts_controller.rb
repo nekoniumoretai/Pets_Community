@@ -25,8 +25,6 @@ class User::PostsController < ApplicationController
       if params[:user_id]
         @user = User.find(params[:user_id])
         @posts = Post.where(user_id: params[:user_id]).order(created_at: :desc)
-      # elsif params[:user_id]
-      #   @posts = Post.where(user_id: [*current_user.following_ids])
       else
         @posts = Post.order(created_at: :desc)
       end
@@ -54,7 +52,7 @@ class User::PostsController < ApplicationController
   end
 
   def followings
-    @following_posts = Post.where(use_id: [*current_user.following_ids])
+    @posts = Post.where(user_id: [*current_user.following_ids])
   end
 
   private
